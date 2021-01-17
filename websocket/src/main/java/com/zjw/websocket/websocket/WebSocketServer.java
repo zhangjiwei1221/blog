@@ -20,6 +20,15 @@ public class WebSocketServer {
         webSocketMap.put(session.getId(), this);
     }
 
+    @OnMessage
+    public void onMessage(String message, Session session){
+        try {
+            sendMessage(message);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     @OnError
     public void onError(Throwable error, Session session) throws Throwable {
         throw error;
