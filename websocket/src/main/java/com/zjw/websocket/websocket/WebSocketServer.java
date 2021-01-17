@@ -21,7 +21,7 @@ public class WebSocketServer {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session){
+    public void onMessage(String message, Session session) {
         try {
             sendMessage(message);
         } catch (Exception e){
