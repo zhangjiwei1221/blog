@@ -1,31 +1,23 @@
 package com.zjw.websocket;
 
+import com.zjw.websocket.dao.UserDao;
+import com.zjw.websocket.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @SpringBootTest
 class WebsocketApplicationTests {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private UserDao dao;
 
     @Test
     public void jdbcTest() {
-        String sql = "select * from user";
-        List<Map<String, Object>> list =  jdbcTemplate.queryForList(sql);
-        for (Map<String, Object> map : list) {
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                System.out.print(entry.getKey() + " : " + entry.getValue() + "\t");
-            }
-            System.out.println();
-        }
+        User user = new User();
+        user.setUsername("张三");
+        user.setPassword("123456");
+        System.out.println(dao.isOk(user));
     }
 
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script th:src="${application.vueJs}"></script>
+    <script th:src="${application.axios}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{~/static/css/bootstrap.css}"/>
+    <script th:src="${application.jquery}"></script>
+    <script th:src="${application.bootstrapJs}"></script>
+    <script th:src="${application.elementUI}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{~/static/css/index.css}"/>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-6 col-md-12">
+                    <form class="form-horizontal">
+                        <span class="heading">用户登录</span>
+                        <div class="form-group">
+                            <label>
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="用户名" v-model="username">
+                            </label>
+                        </div>
+                        <div class="form-group help">
+                            <label>
+                                <input type="password" class="form-control" id="inputPassword3" placeholder="密　码" v-model="password">
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default" style="float: none;" @click.prevent="login">登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="loading" class="text-center" style="display: none;">
+            <div class="spinner-border" role="status"></div>
+        </div>
+        <div v-if="toast.isShow" class="toast show toast-pos" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="mr-auto">通知</strong>
+                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                    <span aria-hidden="true" @click="hidden">&times;</span>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{ toast.msg }}
+            </div>
+        </div>
+    </div>
+    <script th:src="@{~/static/js/index.js}"></script>
+    <script th:src="@{~/static/js/axios.js}"></script>
+</body>
+</html>

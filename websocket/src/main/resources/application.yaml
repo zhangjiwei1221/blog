@@ -4,3 +4,15 @@ spring:
     username: root
     password: root
 
+  main:
+    banner-mode: off
+
+  thymeleaf:
+    cache: false
+
+  mvc:
+    static-path-pattern: /static/**
+
+logging:
+  level:
+    root: error

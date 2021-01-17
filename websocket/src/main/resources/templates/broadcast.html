@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>广播通知</title>
+    <script th:src="${application.vueJs}"></script>
+    <script th:src="${application.axios}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{~/static/css/bootstrap.css}"/>
+    <script th:src="${application.jquery}"></script>
+    <script th:src="${application.bootstrapJs}"></script>
+    <script th:src="${application.elementUI}"></script>
+</head>
+<body>
+    <div id="app">
+        <label>
+            <input type="text" v-model="msg"/>
+            <button @click="sendMsg">发送</button>
+        </label>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                msg: ''
+            },
+            methods: {
+                sendMsg() {
+                    axios.post('/broadcast', {
+                        msg: this.msg
+                    }).then(data => {
+                        alert('发送成功')
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
