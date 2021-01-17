@@ -24,7 +24,7 @@ public class WebSocketServer {
     public void onMessage(String message, Session session) {
         try {
             sendMessage(message);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
