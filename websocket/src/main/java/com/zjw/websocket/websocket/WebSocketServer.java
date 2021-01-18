@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Component
-@ServerEndpoint(value = "/websocket")
+@ServerEndpoint("/websocket")
 public class WebSocketServer {
 
     private Session session;
