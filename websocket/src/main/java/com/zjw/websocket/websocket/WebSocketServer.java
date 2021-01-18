@@ -12,12 +12,12 @@ import java.util.Map;
 public class WebSocketServer {
 
     private Session session;
-    private static final Map<String, WebSocketServer> webSocketMap = new LinkedHashMap<>();
+    private static final Map<String, WebSocketServer> connections = new LinkedHashMap<>();
 
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
-        webSocketMap.put(session.getId(), this);
+        connections.put(session.getId(), this);
     }
 
     @OnMessage
@@ -36,7 +36,7 @@ public class WebSocketServer {
 
     @OnClose
     public void onClose() {
-        webSocketMap.remove(session.getId());
+        connections.remove(session.getId());
     }
 
     public void sendMessage(String message) throws IOException {
@@ -44,7 +44,7 @@ public class WebSocketServer {
     }
 
     public static void broadcast(String message) {
-        webSocketMap.forEach((k, v) -> {
+        connections.forEach((k, v) -> {
             try {
                 v.sendMessage(message);
             } catch (Exception e) {
