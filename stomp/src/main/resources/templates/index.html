@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+</head>
+<body>
+    <div id="greet"></div>
+    <script>
+
+        let socket = new SockJS('/websocket')
+        let stompClient = Stomp.over(socket);
+        stompClient.connect({}, function () {
+            stompClient.subscribe('/broadcast/greet', function (greet) {
+                console.log(greet);
+                showGreeting(JSON.parse(greet.body).content)
+            })
+        })
+
+        function showGreeting(clientMessage) {
+            document.getElementById("greet").innerText += `${clientMessage}\n`
+        }
+
+    </script>
+</body>
+</html>
