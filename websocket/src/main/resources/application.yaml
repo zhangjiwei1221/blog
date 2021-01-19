@@ -16,3 +16,10 @@ spring:
 logging:
   level:
     root: error
+
+server:
+  port: 8443
+  ssl.key-store: classpath:keystore.jks
+  ssl.key-store-password: 123456
+  ssl.key-password: 123456
+  ssl.key-alias: tomcat
