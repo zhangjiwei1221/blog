@@ -23,7 +23,7 @@ const vue = new Vue({
     }
 })
 
-let socket = new WebSocket("ws://localhost:8080/websocket")
+let socket = new WebSocket("wss://localhost/websocket")
 socket.onerror = err => {
     console.log(err)
 }
