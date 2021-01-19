@@ -16,7 +16,7 @@
 
         function sendMsg() {
             const msg = document.getElementById('msg').value
-            stompClient.send("/sendMsg", {}, JSON.stringify({'msg': msg}))
+            stompClient.send("/sendMsg", {}, msg)
             alert('发送成功')
         }
 

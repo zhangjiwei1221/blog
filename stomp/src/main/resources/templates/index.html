@@ -13,9 +13,8 @@
         let socket = new SockJS('/websocket')
         let stompClient = Stomp.over(socket);
         stompClient.connect({}, function () {
-            stompClient.subscribe('/broadcast/greet', function (greet) {
-                console.log(greet);
-                showGreeting(JSON.parse(greet.body).content)
+            stompClient.subscribe('/broadcast/greet', function (frame) {
+                showGreeting(frame.body)
             })
         })
 
