@@ -13,7 +13,6 @@
         let stompClient = Stomp.over(socket)
         stompClient.connect({}, function () {
             stompClient.subscribe('/broadcast/greet', function (frame) {
-                console.log(frame)
                 showGreeting(frame.body)
             })
         })
