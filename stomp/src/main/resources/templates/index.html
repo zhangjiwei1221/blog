@@ -13,7 +13,7 @@
         let stompClient = Stomp.over(socket)
         stompClient.connect({}, function () {
             stompClient.subscribe('/broadcast/greet', function (frame) {
-                showGreeting(frame.body)
+                showGreeting(`收到信息: ${frame.body}`)
             })
         })
 
