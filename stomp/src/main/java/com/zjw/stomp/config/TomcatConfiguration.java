@@ -32,5 +32,4 @@ public class TomcatConfiguration {
         return context -> context.addServletContainerInitializer(new WsSci(), null);
     }
 
-
 }
