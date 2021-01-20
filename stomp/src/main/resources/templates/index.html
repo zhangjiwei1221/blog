@@ -10,10 +10,11 @@
     <div id="greet"></div>
     <script>
 
-        let socket = new SockJS('/websocket')
-        let stompClient = Stomp.over(socket);
+        let socket = new WebSocket('wss://localhost/websocket')
+        let stompClient = Stomp.over(socket)
         stompClient.connect({}, function () {
             stompClient.subscribe('/broadcast/greet', function (frame) {
+                console.log(frame)
                 showGreeting(frame.body)
             })
         })

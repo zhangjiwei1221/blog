@@ -11,7 +11,7 @@
     <button onclick="sendMsg()">发送</button>
     <script>
 
-        let socket = new SockJS('/websocket')
+        let socket = new WebSocket('wss://localhost/websocket')
         let stompClient = Stomp.over(socket);
 
         function sendMsg() {
