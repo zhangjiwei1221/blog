@@ -8,17 +8,16 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 /**
- * Address
+ * TestEntity
  *
  * @author zjw
- * @createTime 2021/1/22 11:24
+ * @createTime 2021/1/22 15:35
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Address {
+public class TestEntity {
 
     @JsonAdapter(MongoObjectId.class)
     private ObjectId _id;
-    private String addressName;
 }
