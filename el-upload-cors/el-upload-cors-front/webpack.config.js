@@ -11,7 +11,7 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.json', '.vue', '.scss', '.css']
+    extensions: ['.vue']
   },
   plugins: [
     new VueLoaderPlugin()
