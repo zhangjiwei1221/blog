@@ -1,4 +1,4 @@
-package cn.zjw.study.aspect;
+package cn.zjw.study.config;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
