@@ -1,0 +1,5 @@
+server:
+  port: 8888
+
+upload:
+  filePath: D:\\Temp\\img\\

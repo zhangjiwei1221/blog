@@ -2,30 +2,29 @@
   <div class="app">
     <el-upload
       class="upload-demo"
-      action="https://jsonplaceholder.typicode.com/posts/"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :file-list="fileList"
-      list-type="picture">
+      action=""
+      :http-request="upload">
       <el-button size="small" type="primary">点击上传</el-button>
     </el-upload>
   </div>
 </template>
 
 <script>
+
+import axios from 'axios';
+
 export default {
   name: 'Upload',
-  data() {
-    return {
-      fileList: []
-    }
-  },
   methods: {
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview(file) {
-      console.log(file);
+    upload(param) {
+      const formData = new FormData()
+      formData.append('file', param.file)
+      const url = 'http://localhost:8888/uploadWithoutAction'
+      axios.post(url, formData).then(data => {
+        console.log('上传图片成功')
+      }).catch(response => {
+        console.log('图片上传失败')
+      })
     }
   }
 }
