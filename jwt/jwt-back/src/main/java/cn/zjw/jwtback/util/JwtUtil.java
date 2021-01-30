@@ -1,16 +1,14 @@
 package cn.zjw.jwtback.util;
 
 
-import cn.zjw.jwtback.entity.User;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import java.time.Instant;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author zjw
@@ -18,20 +16,9 @@ import java.util.Map;
 @Component
 public class JwtUtil {
 
-    private static String alg;
-    private static String typ;
     private static String secret;
     private static long expiration;
-
-    @Value("${jwt.alg}")
-    public void setAlg(String alg) {
-        JwtUtil.alg = alg;
-    }
-
-    @Value("${jwt.typ}")
-    public void setTyp(String typ) {
-        JwtUtil.typ = typ;
-    }
+    private static long rememberTime;
 
     @Value("${jwt.secret}")
     public void setSecret(String secret) {
@@ -43,29 +30,45 @@ public class JwtUtil {
         JwtUtil.expiration = expiration;
     }
 
-    public static String createToken(User user) {
-        Date expireDate = new Date(System.currentTimeMillis() + JwtUtil.expiration * 1000);
-        Map<String, Object> map = new HashMap<>();
-        map.put("alg", JwtUtil.alg);
-        map.put("typ", JwtUtil.typ);
+    @Value("${jwt.remember-time}")
+    public static void setRememberTime(long rememberTime) {
+        JwtUtil.rememberTime = rememberTime;
+    }
+
+    public static String createToken(Long uid, Instant issueAt) {
+        Instant exp = issueAt.plusSeconds(expiration);
         return JWT.create()
-                .withHeader(map)
-                .withClaim("id", user.getId())
-                .withClaim("username", user.getUsername())
-                .withExpiresAt(expireDate)
-                .withIssuedAt(new Date())
+                .withClaim("sub", uid.toString())
+                .withClaim("iat", Date.from(issueAt))
+                .withClaim("exp", Date.from(exp))
                 .sign(Algorithm.HMAC256(JwtUtil.secret));
     }
 
-    public static boolean verifyToken(String token) {
+    public static DecodedJWT decode(String token){
         try {
-            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(JwtUtil.secret)).build();
-            DecodedJWT jwt = verifier.verify(token);
-            return jwt.getClaims() != null;
+            return JWT.decode(token);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
+    }
+
+    public static void verifyToken(String token) {
+        JWTVerifier verifier = JWT.require(Algorithm.HMAC256(JwtUtil.secret)).build();
+        verifier.verify(token);
+    }
+
+    public static String getRefreshToken(DecodedJWT jwtToken, Instant exp) {
+        Instant now = Instant.now();
+        if ((now.getEpochSecond() - exp.getEpochSecond()) > rememberTime) {
+            return null;
+        }
+        Instant newExp = exp.plusSeconds(expiration);
+        return JWT.create()
+                .withClaim("sub", jwtToken.getSubject())
+                .withClaim("iat", Date.from(exp))
+                .withClaim("exp", Date.from(newExp))
+                .sign(Algorithm.HMAC256(JwtUtil.secret));
     }
 
 }

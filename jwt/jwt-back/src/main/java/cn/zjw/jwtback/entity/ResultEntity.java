@@ -12,13 +12,13 @@ import lombok.RequiredArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-public class ResultData<T> {
+public class ResultEntity<T> {
 
     private T data;
-    private int code = 1;
-    private String msg = "success";
+    private boolean status = true;
+    private String errMsg = "";
 
-    public ResultData(T data) {
+    public ResultEntity(T data) {
         this.data = data;
     }
 }

@@ -29,7 +29,6 @@ spring:
       shutdown-timeout: 100ms
 
 jwt:
-  alg: HS256
-  typ: JWT
   expiration: 1800
   secret: zjw1221
+  remember-day: 15

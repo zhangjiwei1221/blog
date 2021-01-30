@@ -1,6 +1,6 @@
 package cn.zjw.jwtback.config;
 
-import cn.zjw.study.entity.ResultData;
+import cn.zjw.jwtback.entity.ResultEntity;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,6 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @Configuration
@@ -31,13 +30,13 @@ class ResultDataAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if (body instanceof ResultData) {
+        if (body instanceof ResultEntity) {
             return body;
         }
         if (body instanceof String) {
-            return gson.toJson(new ResultData<>(body));
+            return gson.toJson(new ResultEntity<>(body));
         }
-        return new ResultData<>(body);
+        return new ResultEntity<>(body);
     }
 
 }

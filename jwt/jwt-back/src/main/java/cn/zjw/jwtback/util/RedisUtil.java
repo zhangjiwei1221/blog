@@ -18,7 +18,7 @@ public class RedisUtil {
         this.redisTemplate = redisTemplate;
     }
 
-    public boolean setExpire(int key, long time) {
+    public boolean setExpire(long key, long time) {
         return setExpire(String.valueOf(key), time);
     }
 
@@ -39,7 +39,7 @@ public class RedisUtil {
         return time == null ? -2 : time;
     }
 
-    public long getExpire(int key) {
+    public long getExpire(long key) {
         return getExpire(String.valueOf(key));
     }
 
@@ -48,16 +48,16 @@ public class RedisUtil {
         return isExist != null && !isExist.equals(false);
     }
 
-    public boolean hasKey(int key) {
+    public boolean hasKey(long key) {
         return hasKey(String.valueOf(key));
     }
 
-    public void del(Integer... key) {
+    public void del(Long... key) {
         if (key != null && key.length > 0) {
             if (key.length == 1) {
                 redisTemplate.delete(String.valueOf(key[0]));
             } else {
-                for (Integer s : key) {
+                for (Long s : key) {
                     redisTemplate.delete(String.valueOf(s));
                 }
             }
@@ -76,15 +76,15 @@ public class RedisUtil {
         }
     }
 
-    public String get(int key) {
+    public Object get(long key) {
         return get(String.valueOf(key));
     }
 
-    public String get(String key) {
+    public Object get(String key) {
         return Objects.requireNonNull(redisTemplate.opsForValue().get(key)).toString();
     }
 
-    public boolean set(int key, Object value) {
+    public boolean set(long key, Object value) {
         return set(String.valueOf(key), value);
     }
 
@@ -98,7 +98,7 @@ public class RedisUtil {
         }
     }
 
-    public boolean set(int key, Object value, long time) {
+    public boolean set(long key, Object value, long time) {
         return set(String.valueOf(key), value, time);
     }
 

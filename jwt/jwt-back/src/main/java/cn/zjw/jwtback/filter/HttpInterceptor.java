@@ -1,7 +1,8 @@
 package cn.zjw.jwtback.filter;
 
-import cn.zjw.jwtback.entity.ResultData;
+import cn.zjw.jwtback.entity.ResultEntity;
 import cn.zjw.jwtback.util.JwtUtil;
+import cn.zjw.jwtback.util.UserSecurityUtil;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -16,10 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 public class HttpInterceptor implements HandlerInterceptor {
 
     private final Gson gson;
+    private final UserSecurityUtil userSecurityUtil;
 
     @Autowired
-    public HttpInterceptor(Gson gson) {
+    public HttpInterceptor(Gson gson, UserSecurityUtil userSecurityUtil) {
         this.gson = gson;
+        this.userSecurityUtil = userSecurityUtil;
     }
 
     @Override
@@ -28,17 +31,17 @@ public class HttpInterceptor implements HandlerInterceptor {
             response.setStatus(HttpServletResponse.SC_OK);
             return true;
         }
-        String token = request.getHeader("Authorization");
-        if (token != null) {
-            if (JwtUtil.verifyToken(token)) {
-                return true;
-            }
+
+        boolean isOk = userSecurityUtil.verifyWebToken(request, response);
+
+        if (!isOk) {
+            ResultEntity<String> resultEntity = new ResultEntity<>();
+            resultEntity.setErrMsg("请重新登录");
+            resultEntity.setStatus(false);
+            response.getWriter().write(gson.toJson(resultEntity));
+            return false;
         }
-        ResultData<String> resultData = new ResultData<>();
-        resultData.setMsg("token verify failed!");
-        resultData.setCode(-1);
-        response.getWriter().write(gson.toJson(resultData));
-        return false;
+        return true;
     }
 
 }

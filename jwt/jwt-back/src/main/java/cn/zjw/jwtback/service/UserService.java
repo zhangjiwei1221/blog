@@ -1,10 +1,18 @@
 package cn.zjw.jwtback.service;
 
 import cn.zjw.jwtback.dao.UserDao;
+import cn.zjw.jwtback.entity.JwtEntity;
 import cn.zjw.jwtback.entity.User;
+import cn.zjw.jwtback.util.JwtUtil;
+import cn.zjw.jwtback.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Optional;
 
 /**
  * UserService
@@ -16,26 +24,25 @@ import java.util.List;
 public class UserService {
 
     private final UserDao dao;
+    private final RedisUtil redis;
 
     @Autowired
-    public UserService(UserDao dao) {
+    public UserService(UserDao dao, RedisUtil redis) {
         this.dao = dao;
+        this.redis = redis;
     }
 
-    public boolean updateUsername(User user) {
-        if (dao.existsById(user.getId())) {
-            dao.save(user);
-            return true;
-        }
-        return false;
+    public User findByUsername(String username) {
+        return dao.findByUsername(username);
     }
 
-    public List<User> list() {
-        return dao.findAll();
-    }
-
-    public User login(String username, String password) {
-        return dao.findByUsernameAndPassword(username, password);
+    @Transactional
+    public String createWebToken(Long uid, Boolean isRemember) {
+        Instant now = Instant.now();
+        String token = JwtUtil.createToken(uid, now);
+        LocalDateTime lastLoginTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
+        redis.set(uid, new JwtEntity(token, lastLoginTime, isRemember));
+        return token;
     }
 
 }
