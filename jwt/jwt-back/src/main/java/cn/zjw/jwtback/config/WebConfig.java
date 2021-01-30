@@ -24,7 +24,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		registry.addMapping("/**")
 				.allowedOrigins("*")
 				.allowedMethods("POST", "GET", "PUT", "PATCH", "OPTIONS", "DELETE")
-				.exposedHeaders("Authorization")
+				.exposedHeaders("authorization")
 				.allowedHeaders("*")
 				.maxAge(3600);
 	}

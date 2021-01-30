@@ -30,7 +30,7 @@ public class UserSecurityUtil {
     }
 
     public boolean verifyWebToken(HttpServletRequest req, HttpServletResponse resp) {
-        String token = req.getHeader("Authorization");
+        String token = req.getHeader("authorization");
         if (token == null) {
             return false;
         }
@@ -53,7 +53,7 @@ public class UserSecurityUtil {
                 redis.del(uid);
                 return false;
             }
-            resp.setHeader("Authorization", newToken);
+            resp.setHeader("authorization", newToken);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class UserSecurityUtil {
         if (now.getEpochSecond() - exp.getEpochSecond() <= validateTime) {
             token = JwtUtil.getRefreshToken(jwtToken);
         }
-        resp.setHeader("Authorization", token);
+        resp.setHeader("authorization", token);
         return true;
     }
 }
