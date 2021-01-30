@@ -1,0 +1,35 @@
+spring:
+  main:
+    banner-mode: off
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=GMT%2B8&charset=utf8mb4&useSSL=false
+    username: root
+    password: root
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+
+  redis:
+    database: 0
+    host: 47.116.72.33
+    port: 6379
+    password: joa183hv9037
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 10
+        min-idle: 5
+      shutdown-timeout: 100ms
+
+jwt:
+  alg: HS256
+  typ: JWT
+  expiration: 1800
+  secret: zjw1221
