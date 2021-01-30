@@ -43,4 +43,8 @@ public class UserService {
         return dao.findAll(PageRequest.of(pageIndex, pageCount)).stream().collect(Collectors.toList());
     }
 
+    public User login(String username, String password) {
+        return dao.findByUsernameAndPassword(username, password);
+    }
+
 }

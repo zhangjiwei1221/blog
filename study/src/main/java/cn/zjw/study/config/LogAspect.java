@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @author zjw
  * @createTime 2021/1/24 20:11
  */
-@Aspect
+//@Aspect
 @Component
 public class LogAspect {
 
