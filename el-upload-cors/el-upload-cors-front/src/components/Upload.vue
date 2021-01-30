@@ -2,8 +2,7 @@
   <div class="app">
     <el-upload
       class="upload-demo"
-      action=""
-      :http-request="upload">
+      action="http://localhost:8888/springboot/uploadByAction">
       <el-button size="small" type="primary">点击上传</el-button>
     </el-upload>
   </div>
