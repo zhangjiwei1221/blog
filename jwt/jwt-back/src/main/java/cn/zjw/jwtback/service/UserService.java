@@ -6,6 +6,7 @@ import cn.zjw.jwtback.entity.User;
 import cn.zjw.jwtback.util.JwtUtil;
 import cn.zjw.jwtback.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,10 @@ public class UserService {
         this.redis = redis;
     }
 
+    public User findById(Long uid) {
+        return dao.findById(uid).orElse(null);
+    }
+
     public User findByUsername(String username) {
         return dao.findByUsername(username);
     }
@@ -43,6 +48,11 @@ public class UserService {
         LocalDateTime lastLoginTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
         redis.set(uid, new JwtEntity(token, lastLoginTime, isRemember));
         return token;
+    }
+
+    @Transactional
+    public void deleteWebToken(Long uid) {
+        redis.del(uid);
     }
 
 }

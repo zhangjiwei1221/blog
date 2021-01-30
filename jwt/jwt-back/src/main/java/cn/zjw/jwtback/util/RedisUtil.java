@@ -53,14 +53,8 @@ public class RedisUtil {
     }
 
     public void del(Long... key) {
-        if (key != null && key.length > 0) {
-            if (key.length == 1) {
-                redisTemplate.delete(String.valueOf(key[0]));
-            } else {
-                for (Long s : key) {
-                    redisTemplate.delete(String.valueOf(s));
-                }
-            }
+        for (Long s : key) {
+            redisTemplate.delete(String.valueOf(s));
         }
     }
 
@@ -81,7 +75,7 @@ public class RedisUtil {
     }
 
     public Object get(String key) {
-        return Objects.requireNonNull(redisTemplate.opsForValue().get(key)).toString();
+        return redisTemplate.opsForValue().get(key);
     }
 
     public boolean set(long key, Object value) {

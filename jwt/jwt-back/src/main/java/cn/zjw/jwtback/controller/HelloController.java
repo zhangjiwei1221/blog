@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/hello")
-    public String hello(String msg) {
-        return "hello, " + msg;
+    public String hello() {
+        return "Hello, world!";
     }
 
 }

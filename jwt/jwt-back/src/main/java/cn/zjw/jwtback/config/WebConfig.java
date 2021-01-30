@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.handler.MappedInterceptor;
 
 
 @Configuration
@@ -32,7 +33,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	protected void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(httpInterceptor)
 				.addPathPatterns("/**")
-				.excludePathPatterns("/login");
+				.excludePathPatterns("/login", "/error");
 		super.addInterceptors(registry);
 	}
 

@@ -31,4 +31,5 @@ spring:
 jwt:
   expiration: 1800
   secret: zjw1221
-  remember-day: 15
+  remember-time: 1296000
+  validate-time: 300
