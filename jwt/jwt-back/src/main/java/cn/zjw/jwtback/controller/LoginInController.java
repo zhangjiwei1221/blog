@@ -8,6 +8,8 @@ import cn.zjw.jwtback.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * LoginController
  *
@@ -25,8 +27,8 @@ public class LoginInController {
     }
 
     @PostMapping("/login")
-    public ResultEntity<String> login(@RequestBody LoginEntity loginEntity) {
-        ResultEntity<String> resultEntity = new ResultEntity<>();
+    public ResultEntity<Long> login(@RequestBody LoginEntity loginEntity, HttpServletResponse response) {
+        ResultEntity<Long> resultEntity = new ResultEntity<>();
         User user = userService.findByUsername(loginEntity.getUsername());
         boolean isOk = user != null && user.getPassword().equals(loginEntity.getPassword());
         if (!isOk) {
@@ -35,7 +37,8 @@ public class LoginInController {
             return resultEntity;
         }
         String token = userService.createWebToken(user.getId(), loginEntity.getIsRemember());
-        resultEntity.setData(token);
+        response.setHeader("authorization", token);
+        resultEntity.setData(user.getId());
         return resultEntity;
     }
 

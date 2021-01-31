@@ -46,7 +46,7 @@ public class UserService {
         Instant now = Instant.now();
         String token = JwtUtil.createToken(uid, now);
         LocalDateTime lastLoginTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
-        redis.set(uid, new JwtEntity(token, lastLoginTime, isRemember));
+        redis.set(uid, new JwtEntity(token, lastLoginTime, isRemember != null && isRemember));
         return token;
     }
 

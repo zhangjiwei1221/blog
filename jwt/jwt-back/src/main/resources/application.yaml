@@ -28,8 +28,11 @@ spring:
         min-idle: 5
       shutdown-timeout: 100ms
 
+server:
+  port: 8888
+
 jwt:
-  expiration: 1800
+  expiration: 10
   secret: zjw1221
   remember-time: 1296000
   validate-time: 300

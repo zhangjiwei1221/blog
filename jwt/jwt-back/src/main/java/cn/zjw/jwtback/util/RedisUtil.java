@@ -59,14 +59,8 @@ public class RedisUtil {
     }
 
     public void del(String... key) {
-        if (key != null && key.length > 0) {
-            if (key.length == 1) {
-                redisTemplate.delete(key[0]);
-            } else {
-                for (String s : key) {
-                    redisTemplate.delete(s);
-                }
-            }
+        for (String s : key) {
+            redisTemplate.delete(s);
         }
     }
 

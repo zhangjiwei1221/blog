@@ -2,8 +2,7 @@ package cn.zjw.jwtback.controller;
 
 import cn.zjw.jwtback.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * LoginOutController
@@ -22,7 +21,7 @@ public class LoginOutController {
         this.userService = userService;
     }
 
-    @PostMapping("/exit")
+    @GetMapping("/exit")
     public String login(Long uid) {
         userService.deleteWebToken(uid);
         return "注销成功";
