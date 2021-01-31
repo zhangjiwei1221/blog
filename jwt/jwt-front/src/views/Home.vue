@@ -45,7 +45,11 @@ export default {
         method: 'get',
         url: '/hello',
       }).then(res => {
-        Message(res.data)
+        if (res.data) {
+          Message(res.data)
+        } else {
+          Message('请重新登录')
+        }
       }).catch(err => {
         console.log(err)
       })

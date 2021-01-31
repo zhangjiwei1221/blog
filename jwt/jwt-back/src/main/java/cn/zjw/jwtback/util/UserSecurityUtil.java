@@ -59,10 +59,14 @@ public class UserSecurityUtil {
             e.printStackTrace();
             return false;
         }
-        Instant exp = jwtEntity.getLastLoginTime().atZone(ZoneId.systemDefault()).toInstant();
-        Instant now = Instant.now();
-        if (now.getEpochSecond() - exp.getEpochSecond() <= validateTime) {
-            token = JwtUtil.getRefreshToken(jwtToken);
+        if (jwtEntity.getIsRemember()) {
+            token = JwtUtil.getRefreshToken(jwtToken, jwtEntity);
+        } else {
+            Instant exp = jwtEntity.getLastLoginTime().atZone(ZoneId.systemDefault()).toInstant();
+            Instant now = Instant.now();
+            if (now.getEpochSecond() - exp.getEpochSecond() <= validateTime) {
+                token = JwtUtil.getRefreshToken(jwtToken);
+            }
         }
         resp.setHeader("authorization", token);
         return true;
