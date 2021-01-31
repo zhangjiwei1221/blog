@@ -59,9 +59,7 @@ public class UserSecurityUtil {
             e.printStackTrace();
             return false;
         }
-        if (jwtEntity.getIsRemember()) {
-            token = JwtUtil.getRefreshToken(jwtToken, jwtEntity);
-        } else {
+        if (!jwtEntity.getIsRemember()) {
             Instant exp = jwtEntity.getLastLoginTime().atZone(ZoneId.systemDefault()).toInstant();
             Instant now = Instant.now();
             if (now.getEpochSecond() - exp.getEpochSecond() <= validateTime) {

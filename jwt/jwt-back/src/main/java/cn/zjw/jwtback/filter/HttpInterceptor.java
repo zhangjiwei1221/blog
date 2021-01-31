@@ -6,6 +6,8 @@ import cn.zjw.jwtback.util.UserSecurityUtil;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +30,7 @@ public class HttpInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getMethod().equals("OPTIONS")) {
+        if (HttpMethod.OPTIONS.matches(request.getMethod())) {
             response.setStatus(HttpServletResponse.SC_OK);
             return true;
         }

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {Message} from 'element-ui'
 
 Vue.use(VueRouter)
 
