@@ -29,13 +29,16 @@ public class LoginInController {
     @PostMapping("/login")
     public ResultEntity<Long> login(@RequestBody LoginEntity loginEntity, HttpServletResponse response) {
         ResultEntity<Long> resultEntity = new ResultEntity<>();
+        // 对登录信息中的用户名和密码进行校验
         User user = userService.findByUsername(loginEntity.getUsername());
         boolean isOk = user != null && user.getPassword().equals(loginEntity.getPassword());
+        // 如果不满足, 直接返回
         if (!isOk) {
             resultEntity.setErrMsg("用户名或密码错误");
             resultEntity.setStatus(false);
             return resultEntity;
         }
+        // 否则生成 Token, 并设置头部的 authorization 信息
         String token = userService.createWebToken(user.getId(), loginEntity.getIsRemember());
         response.setHeader("authorization", token);
         resultEntity.setData(user.getId());

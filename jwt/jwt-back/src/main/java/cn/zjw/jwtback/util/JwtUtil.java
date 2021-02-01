@@ -46,12 +46,14 @@ public class JwtUtil {
     }
 
     public static String createToken(Long uid, Instant issueAt) {
+        // 生成 Token
         Instant exp = issueAt.plusSeconds(expiration);
         return createToken(uid.toString(), issueAt, exp);
     }
 
     public static DecodedJWT decode(String token){
         try {
+            // 返回 Token 的解码信息
             return JWT.decode(token);
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,16 +62,20 @@ public class JwtUtil {
     }
 
     public static void verifyToken(String token) {
+        // 校验 Token
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(JwtUtil.secret)).build();
         verifier.verify(token);
     }
 
     public static String getRefreshToken(DecodedJWT jwtToken, JwtEntity jwtEntity) {
+        // 这个刷新 Token 类用于处理 Token 失效的情况
         Instant exp = jwtEntity.getLastLoginTime().atZone(ZoneId.systemDefault()).toInstant();
         Instant now = Instant.now();
+        // 如果超过记住密码的期限或者是设置未记住密码, 直接返回 null
         if (!jwtEntity.getIsRemember() || (now.getEpochSecond() - exp.getEpochSecond()) > rememberTime) {
             return null;
         }
+        // 否则生成刷新的 Token, 并重新设置 redis 中存储的信息
         Instant newExp = exp.plusSeconds(expiration);
         String token = createToken(jwtToken.getSubject(), now, newExp);
         LocalDateTime lastLoginTime = getLastLoginTime(newExp);
@@ -78,6 +84,8 @@ public class JwtUtil {
     }
 
     public static String getRefreshToken(DecodedJWT jwtToken) {
+        // 这个刷新 Token 类用于处理 Token 有效时间小于某个特定的值的情况
+        // 生成刷新的 Token, 并重新设置 redis 中存储的信息
         Instant now = Instant.now();
         Instant newExp = now.plusSeconds(expiration);
         String token = createToken(jwtToken.getSubject(), now, newExp);
@@ -86,6 +94,7 @@ public class JwtUtil {
     }
 
     private static String createToken(String sub, Instant iat, Instant exp) {
+        // 生成 Token, 包括用户 uid, 生效和失效日期
         return JWT.create()
                 .withClaim("sub", sub)
                 .withClaim("iat", Date.from(iat))
@@ -94,6 +103,7 @@ public class JwtUtil {
     }
 
     private static LocalDateTime getLastLoginTime(Instant newExp) {
+        // 获取当前时间的 LocalDateTime 格式
         return LocalDateTime.ofInstant(newExp, ZoneId.systemDefault());
     }
 

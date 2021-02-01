@@ -21,6 +21,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
+		// 跨域相关配置, 并让 authorization 可在响应头中出现
 		registry.addMapping("/**")
 				.allowedOrigins("*")
 				.allowedMethods("POST", "GET", "PUT", "PATCH", "OPTIONS", "DELETE")
@@ -31,6 +32,8 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
+		// 设置自定义的拦截器, 拦截所有界面
+		// 排除 /login 请求, 未防止 /login 失效, 将 /error 也加入
 		registry.addInterceptor(httpInterceptor)
 				.addPathPatterns("/**")
 				.excludePathPatterns("/login", "/error");

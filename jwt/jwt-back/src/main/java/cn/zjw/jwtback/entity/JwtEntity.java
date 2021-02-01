@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 public class JwtEntity {
 
     private String token;
+    // 防止 LocalDateTime 在序列化中出错
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime lastLoginTime;

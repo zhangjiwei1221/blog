@@ -88,7 +88,9 @@ export default {
         }
       }).then(res => {
         loading.close()
+        // 登录成功将用户 uid 存入 localStorage
         localStorage.setItem('uid', res.data)
+        // 并跳转到 home 界面
         this.$router.push('/home')
         Message('登录成功')
       }).catch(err => {

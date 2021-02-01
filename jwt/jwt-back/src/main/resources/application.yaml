@@ -1,13 +1,16 @@
 spring:
+  # 取消 banner 图标
   main:
     banner-mode: off
 
+  # mysql 数据库连接设置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=GMT%2B8&charset=utf8mb4&useSSL=false
     username: root
     password: root
 
+  # jpa 相关设置
   jpa:
     show-sql: true
     properties:
@@ -15,6 +18,7 @@ spring:
       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     open-in-view: false
 
+  # redis 相关配置
   redis:
     database: 0
     host: localhost
@@ -27,11 +31,17 @@ spring:
         min-idle: 5
       shutdown-timeout: 100ms
 
+# 设置端口
 server:
   port: 8888
 
+# 设置 jwt, 涉及时间单位均为秒
 jwt:
+  # 设置 Token 过期时间
   expiration: 10
+  # 设置 JWT 的密钥
   secret: zjw1221
+  # 设置记住密码的时间
   remember-time: 1296000
+  # 设置小于某个时间, 自动更新 Token
   validate-time: 300

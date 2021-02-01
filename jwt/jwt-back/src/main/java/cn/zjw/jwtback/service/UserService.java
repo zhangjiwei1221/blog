@@ -43,6 +43,8 @@ public class UserService {
 
     @Transactional
     public String createWebToken(Long uid, Boolean isRemember) {
+        // 调用 JwtUtil 工具类的生成 Token 方法
+        // 并在 redis 中存储对应用户的 token, 上次登录时间, 是否记住密码等时间
         Instant now = Instant.now();
         String token = JwtUtil.createToken(uid, now);
         LocalDateTime lastLoginTime = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
@@ -52,6 +54,7 @@ public class UserService {
 
     @Transactional
     public void deleteWebToken(Long uid) {
+        // 从 redis 中删除对应用户的 Jwt 信息
         redis.del(uid);
     }
 

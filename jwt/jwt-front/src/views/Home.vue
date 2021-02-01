@@ -33,7 +33,9 @@ export default {
           uid: localStorage.getItem('uid')
         }
       }).then(() => {
+        // 用户注销后清除本地 Token
         localStorage.removeItem('authorization')
+        // 并跳转到登录界面
         this.$router.push('/login')
         Message('注销成功')
       }).catch(err => {
@@ -46,8 +48,10 @@ export default {
         url: '/hello',
       }).then(res => {
         if (res.data) {
+          // Token 未过期则会正常返回 'Hello, world!' 信息
           Message(res.data)
         } else {
+          // 否则提示用户登录
           Message('请重新登录')
         }
       }).catch(err => {
