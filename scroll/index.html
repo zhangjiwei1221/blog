@@ -13,15 +13,21 @@
         <div class="left">
           <img class="avatar" src="./img/1.jpg" alt=""/>
         </div>
-        <div class="right"></div>
+        <div class="right">
+          庄周の蝴蝶
+        </div>
       </div>
       <div class="bottom"></div>
     </div>
     <div class="dialog">
-      <div class="top"></div>
+      <div class="top">
+        聊天室
+      </div>
       <div class="middle" onmouseover="setColor('#cecdcd')" onmouseout="setColor('#0000')"></div>
       <div class="line"></div>
       <div class="bottom">
+        <label><textarea class="messageText" autofocus="autofocus" maxlength="256" onkeypress="send(event.key)"></textarea></label>
+        <button class="send" onclick="sendMsg()" title="按下 ENTER 发送">发送</button>
       </div>
     </div>
   </div>
