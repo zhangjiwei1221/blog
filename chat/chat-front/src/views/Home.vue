@@ -1,18 +1,17 @@
 <template>
-  <div id="app">
-
+  <div class="home">
+    <div>Home</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App',
+  name: "Home",
   data() {
   }
 }
 </script>
 
-<style>
-#app {
-}
+<style scoped>
+
 </style>
