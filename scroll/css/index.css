@@ -1,0 +1,120 @@
+:root {
+  --scroll-color: #0000;
+}
+
+body {
+  overflow: hidden;
+}
+
+.main {
+  width: 1080px;
+  height: 648px;
+  margin-top: 72px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  border: #d0d0d0 1px solid;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)
+}
+
+.contact {
+  width: 360px;
+  height: 100%;
+  float: left;
+  border-right: #d0d0d0 1px solid;
+}
+
+.contact .top {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  border-bottom: #e0dfdf 1px solid;
+}
+
+.contact .top .left {
+  flex: 1;
+  text-align: center;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+}
+
+.contact .top .right {
+  flex: 3;
+}
+
+.dialog {
+  width: 719px;
+  height: 100%;
+  float: right;
+}
+
+.dialog .top {
+  width: 100%;
+  height: 60px;
+  border-bottom: #d0d0d0 1px solid;
+}
+
+.dialog .top::after {
+  content: " ";
+  float: right;
+  position: relative;
+  top: 61px;
+  border: 4px solid #0000;
+  border-top-color: #8e9292;
+}
+
+.dialog .middle {
+  height: 432px;
+  overflow: auto;
+  padding: 10px;
+  margin: 6px 0 11px 0;
+}
+
+.dialog .middle::-webkit-scrollbar {
+  width: 8px;
+  height: 1px;
+}
+
+.dialog .middle::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: var(--scroll-color);
+}
+
+.dialog .middle::-webkit-scrollbar-track {
+  background: #fff;
+  border-radius: 4px;
+}
+
+.dialog .msg {
+  height: 60px;
+  border: #d0d0d0 1px solid;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.dialog .line {
+  width: 100%;
+  height: 0;
+  position: relative;
+  top: -6px;
+  border-top: #d0d0d0 1px solid;
+}
+
+.dialog .bottom {
+
+}
+
+.dialog .bottom::after {
+  content: " ";
+  float: right;
+  position: relative;
+  top: -15px;
+  border: 4px solid #0000;
+  border-bottom-color: #8e9292;
+}
