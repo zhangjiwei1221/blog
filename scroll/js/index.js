@@ -16,7 +16,7 @@ function sendMsg() {
         node.placeholder = '信息不可为空！'
         return
     }
-    addData(`<div class="msg" style="text-align: right;">${node.value}</div>`)
+    addData(`<div class="msg-right" style="text-align: right;">${node.value}</div>`)
     setScrollToEnd()
     node.value = node.placeholder = ''
 }
