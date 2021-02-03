@@ -1,21 +1,26 @@
 <template>
   <div id="app">
-    <Chat/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Chat from '@/views/Chat'
 
 export default {
   name: 'App',
   components: {
-    Chat
   }
 }
 </script>
 
 <style>
+body, html, #app {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
 #app {
   overflow: hidden;
 }

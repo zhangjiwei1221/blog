@@ -2,10 +2,10 @@
   <div class="contact">
     <div class="top">
       <div class="left">
-        <img class="avatar" src="http://localhost:8888/static/img/1.jpg" alt=""/>
+        <img class="avatar" :src="`https://localhost/static/img/${user.id}.jpg`" alt=""/>
       </div>
       <div class="right">
-
+        {{ user.username }}
       </div>
     </div>
     <div class="bottom">
@@ -15,8 +15,13 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
-  name: "Contact"
+  name: "Contact",
+  computed: mapState({
+    user: 'user'
+  })
 }
 </script>
 
