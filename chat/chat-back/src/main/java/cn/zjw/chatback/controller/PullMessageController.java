@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 /**
  * PullMessageController
@@ -25,8 +27,12 @@ public class PullMessageController {
     }
 
     @PostMapping("/pullMsg")
-    public List<Object> pullMsg(@RequestParam("id") Long id) {
-        return redis.get(id);
+    public List<Object> pullMsg(@RequestParam("from") Long from, @RequestParam("to") Long to) {
+        String key = LongStream.of(from, to)
+                .sorted()
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining("-"));
+        return redis.get(key);
     }
 
 }

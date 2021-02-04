@@ -14,6 +14,8 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 @Component
 @ServerEndpoint(
@@ -28,7 +30,7 @@ public class WebSocketServer {
     private Session session;
     private final Gson gson;
     private final RedisUtil redis;
-    private static final Map<Long, WebSocketServer> WEBSOCKET_MAP = new ConcurrentHashMap<>();
+    private static final Map<Long, Session> WEBSOCKET_MAP = new ConcurrentHashMap<>();
 
     @Autowired
     public WebSocketServer(Gson gson, RedisUtil redis) {
@@ -40,26 +42,25 @@ public class WebSocketServer {
     public void onOpen(@PathParam("id") Long id, Session session) {
         this.id = id;
         this.session = session;
-        WEBSOCKET_MAP.put(this.id, this);
+        WEBSOCKET_MAP.put(this.id, session);
     }
 
     @OnMessage
     public void onMessage(MessageEntity message) throws IOException {
-        redis.set(message.getFrom(), message);
-        redis.set(message.getTo(), message);
+        String key = LongStream.of(message.getFrom(), message.getTo())
+                            .sorted()
+                            .mapToObj(String::valueOf)
+                            .collect(Collectors.joining("-"));
+        redis.set(key, message);
         if (WEBSOCKET_MAP.get(message.getTo()) != null) {
-            WEBSOCKET_MAP.get(message.getFrom()).sendMessage(message);
+            WEBSOCKET_MAP.get(message.getTo()).getBasicRemote().sendText(gson.toJson(message));
         }
-    }
-
-    public void sendMessage(MessageEntity message) throws IOException {
-        session.getBasicRemote().sendText(gson.toJson(message));
     }
 
     @OnClose
     public void onClose() {
-        for (Map.Entry<Long, WebSocketServer> entry : WEBSOCKET_MAP.entrySet()) {
-            if (this.id.equals(entry.getValue().id)) {
+        for (Map.Entry<Long, Session> entry : WEBSOCKET_MAP.entrySet()) {
+            if (this.session.getId().equals(entry.getValue().getId())) {
                 WEBSOCKET_MAP.remove(entry.getKey());
                 return;
             }

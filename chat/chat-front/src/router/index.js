@@ -1,5 +1,4 @@
 import Vue from 'vue'
-import store from '@/store'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
@@ -30,7 +29,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach(((to, from, next) => {
-  const user = store.state.user
+  let tmp = localStorage.getItem('user')
+  const user = tmp && JSON.parse(tmp)
   if (to.path !== '/login' && !user) {
     next('/login')
   }

@@ -40,7 +40,6 @@ import {
   FormItem
 } from 'element-ui'
 import {request} from '@/network'
-import {mapMutations} from 'vuex'
 
 export default {
   name: 'Login',
@@ -73,7 +72,6 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setUser']),
     submitForm() {
       const loading = Loading.service({ fullscreen: true })
       request({
@@ -85,8 +83,13 @@ export default {
         }
       }).then(res => {
         loading.close()
-        console.log(res.data)
-        this.setUser(res.data.data)
+        let user = res.data.data
+        delete user.password
+        if (!user) {
+          Message('用户名或密码错误')
+          return
+        }
+        localStorage.setItem('user', JSON.stringify(user))
         this.$router.push('/chat')
         Message('登录成功')
       }).catch(err => {

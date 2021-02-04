@@ -1,9 +1,10 @@
 import axios from 'axios'
+import api from './const'
 
 export function request(config) {
 
   const req = axios.create({
-    baseURL: 'https://localhost',
+    baseURL: api,
     timeout: 5000
   })
 

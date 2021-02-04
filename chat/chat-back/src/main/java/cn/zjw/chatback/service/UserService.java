@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 /**
  * UserService
@@ -35,6 +38,13 @@ public class UserService {
 
     public User findByUsernameAndPassword(String username, String password) {
         return dao.findByUsernameAndPassword(username, password);
+    }
+
+    public List<User> getFriends(Long uid) {
+        return LongStream.of(1L, 2L, 3L, 4L)
+                .filter(item -> item != uid)
+                .mapToObj(this::findById)
+                .collect(Collectors.toList());
     }
 
 }

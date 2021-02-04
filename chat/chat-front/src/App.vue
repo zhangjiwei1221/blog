@@ -22,6 +22,21 @@ body, html, #app {
 }
 
 #app {
-  overflow: hidden;
+  overflow: auto;
+}
+
+#app::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+#app::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: #afacac;
+}
+
+#app::-webkit-scrollbar-track {
+  background: #efeded;
+  border-radius: 3px;
 }
 </style>
