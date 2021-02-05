@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>群发信息</title>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+</head>
+<body>
+    <label><input type="text" id="msg"/></label>
+    <button onclick="sendMsg()">发送</button>
+    <script>
+
+        let socket = new WebSocket('wss://localhost/websocket/1')
+        let stompClient = Stomp.over(socket);
+
+        function sendMsg() {
+            const msg = document.getElementById('msg').value
+            stompClient.send("/sendMsg", {}, JSON.stringify({
+                from: 1, to: 2, message: msg, time: new Date()
+            }))
+            alert('发送成功')
+        }
+
+    </script>
+</body>
+</html>
+

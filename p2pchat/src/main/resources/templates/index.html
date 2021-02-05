@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+</head>
+<body>
+    <div id="greet"></div>
+    <label><input id="uid"/></label>
+    <button onclick="sub()">sub</button>
+    <script>
+        function sub() {
+            let socket = new WebSocket('wss://localhost/websocket/2')
+            let stompClient = Stomp.over(socket)
+            stompClient.connect({}, function () {
+                stompClient.subscribe(`/user/chat/contact`, function (frame) {
+                    showGreeting(`收到信息: ${frame.body}`)
+                })
+            })
+
+            function showGreeting(clientMessage) {
+                document.getElementById("greet").innerText += `${clientMessage}\n`
+            }
+        }
+
+    </script>
+</body>
+</html>
