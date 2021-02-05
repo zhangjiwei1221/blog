@@ -6,24 +6,42 @@
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
 </head>
 <body>
-    <div id="greet"></div>
     <label><input id="uid"/></label>
-    <button onclick="sub()">sub</button>
+    <button onclick="login()" id="login">登录</button>
+    <label><input id="msg" placeholder="信息后加 -id，发给指定人"/></label>
+    <button onclick="sendMsg()">发送</button>
+    <div id="user"></div>
+    <div id="greet"></div>
     <script>
-        function sub() {
-            let socket = new WebSocket('wss://localhost/websocket/2')
-            let stompClient = Stomp.over(socket)
+        let stompClient
+        function login() {
+            // 根据输入的 id 号模拟不同用户的订阅
+            let socket = new WebSocket(`wss://localhost/websocket/${document.getElementById('uid').value}`)
+            stompClient = Stomp.over(socket)
             stompClient.connect({}, function () {
+                // 所有想要接收给指定用户发送的信息的订阅地址都必须加上/user前缀
                 stompClient.subscribe(`/user/chat/contact`, function (frame) {
-                    showGreeting(`收到信息: ${frame.body}`)
+                    let entity = JSON.parse(frame.body)
+                    showGreeting(`收到用户${entity.from}的信息: ${entity.message}`)
                 })
             })
+
+            document.getElementById('user').innerText = `当前用户为：${document.getElementById('uid').value}`
 
             function showGreeting(clientMessage) {
                 document.getElementById("greet").innerText += `${clientMessage}\n`
             }
         }
 
+        function sendMsg() {
+            const msg = document.getElementById('msg').value
+            stompClient.send("/sendMsg", {}, JSON.stringify({
+                from: document.getElementById('uid').value,
+                to: msg.substring(msg.lastIndexOf('-') + 1),
+                message: msg.substring(0, msg.lastIndexOf('-')),
+                time: new Date()
+            }))
+        }
     </script>
 </body>
 </html>

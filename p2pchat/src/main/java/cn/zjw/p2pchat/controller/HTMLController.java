@@ -11,9 +11,9 @@ public class HTMLController {
         return "index";
     }
 
-    @RequestMapping("/greet")
-    public String greet() {
-        return "greet";
+    @RequestMapping("/chat")
+    public String chat() {
+        return "chat";
     }
 
 }

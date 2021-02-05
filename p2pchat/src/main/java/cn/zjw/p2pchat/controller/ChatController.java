@@ -16,8 +16,11 @@ public class ChatController {
         this.messageService = messageService;
     }
 
+    // 这里的 @MessageMapping 可以当成 @RequestMapping,
+    // 当有信息(sendMsg 方法中的 msg 参数即为客服端发送的信息)发送到 /sendMsg 时
+    // 会在这里进行处理
     @MessageMapping("/sendMsg")
-    public void broadcast(String msg) {
+    public void sendMsg(String msg) {
         messageService.sendToUser(msg);
     }
 

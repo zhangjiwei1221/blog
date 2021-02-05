@@ -24,10 +24,14 @@ public class MessageService {
 
     public void sendToUser(String msg) {
         MessageEntity messageEntity = new Gson().fromJson(msg, MessageEntity.class);
+        // convertAndSendToUser 方法可以发送信给给指定用户,
+        // 底层会自动将第二个参数目的地址 /chat/contact 拼接为
+        // /user/username/chat/contact，其中第二个参数 username 即为这里的第一个参数
+        // username 也是前文中配置的 Principal 用户识别标志
         simpMessagingTemplate.convertAndSendToUser(
                 String.valueOf(messageEntity.getTo()),
                 "/chat/contact",
-                "123"
+                msg
         );
     }
 
