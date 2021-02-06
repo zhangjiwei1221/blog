@@ -11,9 +11,19 @@ public class HTMLController {
         return "index";
     }
 
+    @RequestMapping("/index2")
+    public String index2() {
+        return "index2";
+    }
+
     @RequestMapping("/chat")
     public String chat() {
         return "chat";
+    }
+
+    @RequestMapping("/chat2")
+    public String chat2() {
+        return "chat2";
     }
 
 }
