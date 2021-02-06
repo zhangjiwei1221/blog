@@ -1,5 +1,6 @@
 package cn.zjw.p2pchat.controller;
 
+import cn.zjw.p2pchat.entity.MessageEntity;
 import cn.zjw.p2pchat.service.MessageService2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -16,8 +17,8 @@ public class ChatController2 {
     }
 
     @MessageMapping("/sendMsg2")
-    public void sendMsg(String msg) {
-        messageService.sendToUser(msg);
+    public void sendMsg(MessageEntity messageEntity) {
+        messageService.sendToUser(messageEntity);
     }
 
 }

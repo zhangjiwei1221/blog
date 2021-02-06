@@ -22,9 +22,8 @@ public class MessageService2 {
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
-    public void sendToUser(String msg) {
-        MessageEntity messageEntity = new Gson().fromJson(msg, MessageEntity.class);
-        simpMessagingTemplate.convertAndSend("/chat/contact/" + messageEntity.getTo(), msg);
+    public void sendToUser(MessageEntity messageEntity) {
+        simpMessagingTemplate.convertAndSend("/chat/contact/" + messageEntity.getTo(), messageEntity);
     }
 
 }

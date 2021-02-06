@@ -5,7 +5,6 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 import java.security.Principal;
 import java.util.Map;
-import java.util.UUID;
 
 public class CustomHandshakeHandler extends DefaultHandshakeHandler {
 

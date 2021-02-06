@@ -22,8 +22,7 @@ public class MessageService {
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
-    public void sendToUser(String msg) {
-        MessageEntity messageEntity = new Gson().fromJson(msg, MessageEntity.class);
+    public void sendToUser(MessageEntity messageEntity) {
         // convertAndSendToUser 方法可以发送信给给指定用户,
         // 底层会自动将第二个参数目的地址 /chat/contact 拼接为
         // /user/username/chat/contact，其中第二个参数 username 即为这里的第一个参数
@@ -31,7 +30,7 @@ public class MessageService {
         simpMessagingTemplate.convertAndSendToUser(
                 String.valueOf(messageEntity.getTo()),
                 "/chat/contact",
-                msg
+                messageEntity
         );
     }
 
