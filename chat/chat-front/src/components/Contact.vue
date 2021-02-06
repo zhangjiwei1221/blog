@@ -60,6 +60,7 @@ export default {
   methods: {
     setContact(index) {
       this.active = index
+      delete this.friendList[index].password
       this.$emit('set-contact', this.friendList[index])
     },
     isActive(index) {

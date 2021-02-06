@@ -1,5 +1,6 @@
 package cn.zjw.study;
 
+import cn.zjw.study.service.EmailService;
 import cn.zjw.study.service.UserService;
 import cn.zjw.study.util.RedisUtil;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,11 @@ class TransactionalApplicationTests {
     @Test
     public void redisTest() {
         System.out.println(redis.get("username"));
+    }
+
+    @Test
+    public void emailTest() throws Exception {
+        new EmailService().sendMail("1945192314@qq.com", "", "1945192314@qq.com");
     }
 
 }

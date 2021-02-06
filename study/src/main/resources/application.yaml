@@ -30,6 +30,18 @@ spring:
         min-idle: 5
       shutdown-timeout: 100ms
 
+  mail:
+    host: smtp.qq.com
+    username: 1945192314@qq.com
+    password:
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+
 jwt:
   alg: HS256
   typ: JWT
