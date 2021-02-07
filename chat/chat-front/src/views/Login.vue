@@ -1,7 +1,7 @@
 <template>
   <el-row type="flex" class="login">
     <el-col :span="6">
-      <h1 class="title">JWT 测试</h1>
+      <h1 class="title">聊天室</h1>
       <el-form :model="loginForm" :rules="rules" status-icon ref="ruleForm" class="demo-ruleForm">
         <el-form-item prop="username">
           <el-input

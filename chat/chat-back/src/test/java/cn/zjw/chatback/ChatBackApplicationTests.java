@@ -13,7 +13,6 @@ class ChatBackApplicationTests {
 
     @Test
     public void redisTest() {
-        System.out.println(redis.get(1L).size());
     }
 
 }

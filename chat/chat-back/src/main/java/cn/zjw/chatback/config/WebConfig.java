@@ -29,11 +29,6 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	}
 
 	@Override
-	protected void addInterceptors(InterceptorRegistry registry) {
-		super.addInterceptors(registry);
-	}
-
-	@Override
 	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/static/**")
 				.addResourceLocations("classpath:/static/");

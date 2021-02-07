@@ -18,16 +18,8 @@ public class RedisUtil {
         this.redisTemplate = redisTemplate;
     }
 
-    public List<Object> get(Long key) {
-        return get(String.valueOf(key));
-    }
-
     public List<Object> get(String key) {
         return redisTemplate.opsForList().range(key, 0, -1);
-    }
-
-    public void set(Long key, Object value) {
-        set(String.valueOf(key), value);
     }
 
     public void set(String key, Object value) {

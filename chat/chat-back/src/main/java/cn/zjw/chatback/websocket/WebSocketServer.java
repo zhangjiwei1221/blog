@@ -26,7 +26,6 @@ import java.util.stream.LongStream;
 )
 public class WebSocketServer {
 
-    private Long id = 0L;
     private Session session;
     private final Gson gson;
     private final RedisUtil redis;
@@ -40,9 +39,8 @@ public class WebSocketServer {
 
     @OnOpen
     public void onOpen(@PathParam("id") Long id, Session session) {
-        this.id = id;
         this.session = session;
-        WEBSOCKET_MAP.put(this.id, session);
+        WEBSOCKET_MAP.put(id, session);
     }
 
     @OnMessage
