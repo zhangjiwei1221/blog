@@ -1,6 +1,8 @@
 package cn.zjw.study.service;
 
 import com.sun.mail.util.MailSSLSocketFactory;
+import org.springframework.stereotype.Component;
+
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -14,9 +16,10 @@ import java.util.Properties;
  * @author zjw
  * @createTime 2021/2/6 11:26
  */
+@Component
 public class EmailService {
 
-    public boolean sendMail(String sendMail, String authorizationCode, String takeMail) throws Exception {
+    public void sendMail(String sendMail, String authorizationCode, String takeMail) throws Exception {
         Properties prop = new Properties();
         prop.setProperty("mail.host", "smtp.qq.com");
         prop.setProperty("mail.transport.protocol", "smtp");
@@ -36,7 +39,6 @@ public class EmailService {
         MimeMessage mimeMessage = complexEmail(session, sendMail, takeMail);
         transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
         transport.close();
-        return true;
     }
 
     public static MimeMessage complexEmail(Session session, String sendMail, String takeMail) throws MessagingException {
