@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-
+    <Notify/>
   </div>
 </template>
 
 <script>
+import Notify from '@/views/Notify'
+
 export default {
   name: 'App',
   components: {
+    Notify
   }
 }
 </script>

@@ -29,21 +29,22 @@ public class HttpInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getMethod().equals("OPTIONS")) {
-            response.setStatus(HttpServletResponse.SC_OK);
-            return true;
-        }
-        String token = request.getHeader("Authorization");
-        if (token != null) {
-            if (JwtUtil.verifyToken(token)) {
-                return true;
-            }
-        }
-        ResultData<String> resultData = new ResultData<>();
-        resultData.setMsg("token verify failed!");
-        resultData.setCode(-1);
-        response.getWriter().write(gson.toJson(resultData));
-        return false;
+        return true;
+//        if (request.getMethod().equals("OPTIONS")) {
+//            response.setStatus(HttpServletResponse.SC_OK);
+//            return true;
+//        }
+//        String token = request.getHeader("Authorization");
+//        if (token != null) {
+//            if (JwtUtil.verifyToken(token)) {
+//                return true;
+//            }
+//        }
+//        ResultData<String> resultData = new ResultData<>();
+//        resultData.setMsg("token verify failed!");
+//        resultData.setCode(-1);
+//        response.getWriter().write(gson.toJson(resultData));
+//        return false;
     }
 
 }

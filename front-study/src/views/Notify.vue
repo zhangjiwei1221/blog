@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "Notify",
+  name: 'Notify',
   methods: {
     notifyMe() {
       new Notification('状态更新提醒',{
