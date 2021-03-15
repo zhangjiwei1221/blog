@@ -2,7 +2,6 @@ package cn.zjw.study.service;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 import org.springframework.stereotype.Component;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;

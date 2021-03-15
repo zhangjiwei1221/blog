@@ -1,5 +1,7 @@
 package cn.zjw.study;
 
+import cn.zjw.study.entity.User;
+import cn.zjw.study.mapper.UserMapper;
 import cn.zjw.study.service.EmailService;
 import cn.zjw.study.service.UserService;
 import cn.zjw.study.util.RedisUtil;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
@@ -21,6 +24,15 @@ class TransactionalApplicationTests {
 
     @Autowired
     private RedisUtil redis;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    public void testSelect() {
+        List<User> userList = userMapper.selectList(null);
+        userList.forEach(System.out::println);
+    }
 
     @Test
     public void dbTest() {
