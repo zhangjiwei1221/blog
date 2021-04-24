@@ -21,8 +21,8 @@ export default {
 @bg-color: #7c7cb4;
 
 #app {
-  width: @width;
-  height: @height;
-  background-color: @bg-color;
+  //width: @width;
+  //height: @height;
+  //background-color: @bg-color;
 }
 </style>

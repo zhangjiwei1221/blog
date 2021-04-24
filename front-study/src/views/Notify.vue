@@ -1,18 +1,19 @@
 <template>
-  <button @click="notifyMe">notify</button>
+  <div class="app">
+    <button @click="download">下载</button>
+  </div>
 </template>
 
 <script>
+
 export default {
   name: 'Notify',
   methods: {
-    notifyMe() {
-      new Notification('状态更新提醒',{
-        body: '你的朋友圈有3条新状态，快去查看吧',
-        tag: 'linxin',
-        icon: 'http://blog.gdfengshuo.com/images/avatar.jpg',
-        requireInteraction: true
-      })
+    download() {
+      let str1 = new Blob(['Hello, world1!'], {type: 'text/plain;charset=utf-8'})
+      let str2 = new Blob(['Hello, world2!'], {type: 'text/plain;charset=utf-8'})
+      saveAs(str1, `license.txt`)
+      saveAs(str2, `key.txt`)
     }
   }
 }
