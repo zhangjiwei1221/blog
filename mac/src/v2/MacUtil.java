@@ -52,10 +52,8 @@ public class MacUtil {
         List<String> strList = execCommand(command);
         for (String str : strList) {
             Matcher matcher = pattern.matcher(str);
-            if (matcher.find()) {
-                if (!pattern.matcher(str.replace(matcher.group(), "")).find()) {
-                    macList.add(matcher.group().replace(":", "-").toUpperCase());
-                }
+            if (matcher.find() && matcher.end() == str.length()) {
+                macList.add(matcher.group().replace(":", "-").toUpperCase());
             }
         }
         return macList;
