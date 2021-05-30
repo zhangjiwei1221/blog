@@ -30,6 +30,7 @@ public class MacUtil {
     }
 
     /**
+     * 根据不同操作系统执行不同命令
      * 获取本机 mac 地址集合
      *
      * @return mac 地址集合
@@ -47,6 +48,14 @@ public class MacUtil {
         return Collections.emptyList();
     }
 
+    /**
+     * 通过正则表达式提取执行命令得到的结果集中的 mac 地址
+     * 并调整得到的 mac 地址的格式
+     *
+	 * @param command 查看网络信息的命令
+     *
+     * @return mac 地址集合
+     */
     private static List<String> getMacByCommand(String command) throws IOException {
         List<String> macList = new ArrayList<>();
         List<String> strList = execCommand(command);
@@ -59,6 +68,13 @@ public class MacUtil {
         return macList;
     }
 
+    /**
+     * 执行命令并得到结果的每一行组成的字符串数组
+     *
+	 * @param command 查看网络信息的命令
+     *
+     * @return 执行命令返回的所有数据行
+     */
     private static List<String> execCommand(String command) throws IOException {
         List<String> strList = new ArrayList<>();
         Process process = Runtime.getRuntime().exec(command);
