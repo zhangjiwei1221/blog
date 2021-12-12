@@ -1,6 +1,7 @@
 package cn.butterfly.tree.node;
 
 import cn.butterfly.tree.constant.BaseConstants;
+import cn.butterfly.tree.util.CopyBeanUtils;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.*;
@@ -41,6 +42,23 @@ public class TreeMerger {
 			}
 		}
 		return getRootNodeList(nodeMap.values(), parentIdSet);
+	}
+
+	/**
+	 * 合并节点列表生成下拉树形结构列表
+	 *
+	 * @param nodeList 节点列表
+	 * @param getValueFunction 获取节点值函数
+	 * @return 树形结构列表
+	 */
+	public static <T> List<TreeSelectNode> mergeTreeSelectList(List<T> nodeList, Function<T, String> getValueFunction) {
+		List<TreeSelectNode> treeSelectNodeList = CopyBeanUtils.copyList(
+				nodeList,
+				TreeSelectNode::new,
+				TreeSelectNode::setValue,
+				getValueFunction
+		);
+		return mergeTreeList(treeSelectNodeList);
 	}
 
 	/**

@@ -1,18 +1,18 @@
-package cn.butterfly.tree.dto;
+package cn.butterfly.tree.vo;
 
 import cn.butterfly.tree.node.BaseTreeNode;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * 部门 vo
+ * 部门树 vo
  *
  * @author zjw
  * @date 2021-12-12
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SysDeptVO extends BaseTreeNode<SysDeptVO> {
+public class SysDeptTreeVO extends BaseTreeNode<SysDeptTreeVO> {
 
     /**
      * 部门编码
