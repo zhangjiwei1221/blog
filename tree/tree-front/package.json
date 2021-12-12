@@ -1,0 +1,32 @@
+{
+  "name": "tree-front",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "core-js": "^3.18.1",
+    "element-ui": "^2.15.0",
+    "gsap": "^3.6.0",
+    "normalize.css": "^8.0.1",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/compiler-sfc": "^3.2.12",
+    "babel-plugin-component": "^1.1.1",
+    "less-loader": "^6.2.0",
+    "vue-loader-v16": "^16.0.0-beta.5.4",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

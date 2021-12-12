@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.butterfly.tree.mapper.SysDeptMapper">
+
+    <!--  树形结构数据查询  -->
+    <select id="tree" resultType="cn.butterfly.tree.entity.SysDept">
+        SELECT d.id,
+               d.parent_id,
+               d.code,
+               d.name,
+               d.gmt_create,
+               d.gmt_modified
+               FROM sys_dept AS d
+        WHERE d.del_flag = 0
+    </select>
+
+</mapper>
