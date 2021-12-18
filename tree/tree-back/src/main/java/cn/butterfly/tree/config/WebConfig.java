@@ -4,9 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-
 import static cn.butterfly.tree.constant.BaseConstants.ALL_ORIGIN;
 import static cn.butterfly.tree.constant.BaseConstants.ALL_PATTERN;
+import static org.springframework.http.HttpMethod.*;
 
 /**
  * web 配置
@@ -26,7 +26,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping(ALL_PATTERN)
 				.allowedOrigins(ALL_ORIGIN)
-				.allowedMethods(HttpMethod.POST.name(), HttpMethod.GET.name(), HttpMethod.OPTIONS.name())
+				.allowedMethods(GET.name(), POST.name(), DELETE.name(), HttpMethod.OPTIONS.name())
 				.allowedHeaders(ALL_ORIGIN);
 	}
 

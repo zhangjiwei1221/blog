@@ -7,9 +7,8 @@ import cn.butterfly.tree.node.TreeSelectNode;
 import cn.butterfly.tree.service.ISysDeptService;
 import cn.butterfly.tree.util.CopyBeanUtils;
 import cn.butterfly.tree.vo.SysDeptTreeVO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -48,6 +47,18 @@ public class SysDeptController {
     public BaseResult<List<TreeSelectNode>> treeSelect() {
         List<SysDept> sysDeptList = sysDeptService.tree();
         return BaseResult.success(TreeMerger.mergeTreeSelectList(sysDeptList, SysDept::getName));
+    }
+
+    /**
+     * 根据 id 删除部门
+     *
+     * @param id 部门 id
+     * @return 结果
+     */
+    @DeleteMapping("/delete/{id}")
+    public BaseResult<Object> delete(@PathVariable("id") Long id) {
+        sysDeptService.delete(id);
+        return BaseResult.success();
     }
 
 }

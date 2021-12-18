@@ -20,4 +20,11 @@ public interface ISysDeptService extends IService<SysDept> {
      */
     List<SysDept> tree();
 
+    /**
+     * 根据 id 删除部门
+     *
+	 * @param id 部门 id
+     */
+    void delete(Long id);
+
 }

@@ -38,6 +38,21 @@ public class BaseConstants {
      */
     public static final long ROOT_NODE = 0L;
 
+    /**
+     * 创建时间字段名
+     */
+    public static final String GMT_CREATE_FILED = "gmtCreate";
+
+    /**
+     * 修改时间字段名
+     */
+    public static final String GMT_MODIFIED_FILED = "gmtModified";
+
+    /**
+     * 父主键字段名
+     */
+    public static final String PARENT_ID_FILED = "parentId";
+
     private BaseConstants() {}
 
 }

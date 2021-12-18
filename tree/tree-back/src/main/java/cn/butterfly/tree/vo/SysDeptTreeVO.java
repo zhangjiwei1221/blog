@@ -1,8 +1,13 @@
 package cn.butterfly.tree.vo;
 
+import cn.butterfly.tree.constant.BaseConstants;
 import cn.butterfly.tree.node.BaseTreeNode;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.time.LocalDateTime;
 
 /**
  * 部门树 vo
@@ -25,8 +30,15 @@ public class SysDeptTreeVO extends BaseTreeNode<SysDeptTreeVO> {
     private String name;
 
     @Override
+    @JsonIgnore
     public String getValue() {
         return name;
     }
+
+    /**
+     * 创建时间
+     */
+    @JsonFormat(pattern = BaseConstants.DB_DATE_FORMAT_PATTERN)
+    private LocalDateTime gmtCreate;
 
 }
