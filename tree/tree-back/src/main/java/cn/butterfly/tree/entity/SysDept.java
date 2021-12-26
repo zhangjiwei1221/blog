@@ -34,6 +34,18 @@ public class SysDept extends BaseEntity {
     private Long parentId;
 
     /**
+     * 左节点
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long lft;
+
+    /**
+     * 右节点
+     */
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long rgt;
+
+    /**
      * 部门编码
      */
     private String code;

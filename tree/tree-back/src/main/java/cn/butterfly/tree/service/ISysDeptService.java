@@ -21,6 +21,28 @@ public interface ISysDeptService extends IService<SysDept> {
     List<SysDept> tree();
 
     /**
+     * 根据部门 id 查询指定部门及以下部门树结构列表
+     *
+     * @param id 部门 id
+     * @return 部门树结构列表
+     */
+    List<SysDept> deptWithChildren(Long id);
+
+    /**
+     * 新增部门
+     *
+     * @param sysDept 部门
+     */
+    void add(SysDept sysDept);
+
+    /**
+     * 更新部门信息
+     *
+     * @param sysDept 部门
+     */
+    void update(SysDept sysDept);
+
+    /**
      * 根据 id 删除部门
      *
 	 * @param id 部门 id

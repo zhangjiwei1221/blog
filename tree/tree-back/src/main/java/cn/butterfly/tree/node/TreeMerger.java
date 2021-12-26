@@ -30,10 +30,9 @@ public class TreeMerger {
 				.collect(Collectors.toMap(INode::getId, Function.identity()));
 		Set<Long> parentIdSet = new HashSet<>(nodeList.size());
 		for (T node : nodeList) {
-			Long parentId = node.getParentId();
-			T parentNode = nodeMap.get(parentId);
+			T parentNode = nodeMap.get(node.getParentId());
 			if (parentNode == null) {
-				parentIdSet.add(parentId);
+				parentIdSet.add(node.getId());
 			} else {
 				List<T> children = Optional.ofNullable(parentNode.getChildren())
 						.orElse(new ArrayList<>());
