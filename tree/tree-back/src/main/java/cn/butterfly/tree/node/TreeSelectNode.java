@@ -25,9 +25,4 @@ public class TreeSelectNode extends BaseTreeNode<TreeSelectNode> {
 	@JsonIgnore
 	private Long parentId;
 
-	@Override
-	public String getValue() {
-		return value;
-	}
-
 }

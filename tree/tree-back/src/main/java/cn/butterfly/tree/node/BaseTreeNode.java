@@ -36,12 +36,4 @@ public abstract class BaseTreeNode<T> implements INode<T> {
 	@JsonSerialize(using = ToStringSerializer.class)
 	private Long parentId;
 
-	/**
-	 * 获取节点值抽象接口
-	 * 重写时需要返回例如部门名称、菜单名称等实体的名称作为节点值
-	 *
-	 * @return 节点值
-	 */
-	public abstract String getValue();
-
 }

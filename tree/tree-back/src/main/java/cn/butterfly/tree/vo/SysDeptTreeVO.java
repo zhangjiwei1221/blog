@@ -3,10 +3,8 @@ package cn.butterfly.tree.vo;
 import cn.butterfly.tree.constant.BaseConstants;
 import cn.butterfly.tree.node.BaseTreeNode;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import java.time.LocalDateTime;
 
 /**
@@ -28,12 +26,6 @@ public class SysDeptTreeVO extends BaseTreeNode<SysDeptTreeVO> {
      * 部门名称
      */
     private String name;
-
-    @Override
-    @JsonIgnore
-    public String getValue() {
-        return name;
-    }
 
     /**
      * 创建时间
