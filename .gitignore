@@ -6,6 +6,8 @@ target/
 
 .DS_Store
 node_modules
+out/
+build/
 dist/
 
 
