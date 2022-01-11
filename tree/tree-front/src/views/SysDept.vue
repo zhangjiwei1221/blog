@@ -5,6 +5,10 @@
           default-expand-all
           :data="deptTreeSelect"
           :props="{ label: 'value' }"/>
+      <el-tree
+          lazy
+          :load="loadTreeNode"
+          :props="{ label: 'name', isLeaf: 'isLeaf' }"/>
     </el-aside>
     <el-main>
       <el-table
@@ -101,7 +105,7 @@
 </template>
 
 <script>
-import {add, childTree, info, remove, tree, treeSelect, update} from '@/views/api/dept'
+import {add, childTree, info, lazyTreeSelect, remove, tree, treeSelect, update} from '@/views/api/dept'
 
 export default {
   name: "SysDept",
@@ -139,6 +143,13 @@ export default {
       treeSelect().then(res => {
         this.deptTreeSelect = res.data
       })
+    },
+    /**
+     * 加载懒加载树节点
+     */
+    async loadTreeNode(node, resolve) {
+      let res = await lazyTreeSelect(node.data?.id || 0)
+      return resolve(res.data)
     },
     /**
      * 清空表单缓存

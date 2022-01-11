@@ -86,6 +86,18 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
         baseMapper.deleteById(id);
     }
 
+    @Override
+    public List<SysDept> getByParentId(Long parentId) {
+        return baseMapper.selectList(new LambdaQueryWrapper<SysDept>()
+                .eq(SysDept::getParentId, parentId)
+        );
+    }
+
+    @Override
+    public Boolean isLeaf(SysDept sysDept) {
+        return sysDept.getRgt() - sysDept.getLft() == 1L;
+    }
+
     /**
      * 校验指定节点是否存在子节点, 若存在则报错提醒
      *

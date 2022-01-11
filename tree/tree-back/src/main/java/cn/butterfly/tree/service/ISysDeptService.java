@@ -49,4 +49,20 @@ public interface ISysDeptService extends IService<SysDept> {
      */
     void delete(Long id);
 
+    /**
+     * 根据 parentId 获取部门列表
+     *
+	 * @param parentId parentId
+     * @return 部门列表
+     */
+    List<SysDept> getByParentId(Long parentId);
+
+    /**
+     * 判断部门是否为叶子节点
+     *
+	 * @param sysDept 部门
+     * @return 是否为叶子节点
+     */
+    Boolean isLeaf(SysDept sysDept);
+
 }

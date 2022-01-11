@@ -20,6 +20,14 @@ export function treeSelect(params) {
   })
 }
 
+// 获取部门懒加载下拉树结构
+export function lazyTreeSelect(parentId) {
+  return request({
+    url: `${prefix}/lazyTree/${parentId}`,
+    method: 'get'
+  })
+}
+
 // 获取部门及以下部门树结构列表
 export function childTree(id) {
   return request({

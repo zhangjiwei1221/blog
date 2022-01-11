@@ -7,9 +7,11 @@ import cn.butterfly.tree.node.TreeSelectNode;
 import cn.butterfly.tree.service.ISysDeptService;
 import cn.butterfly.tree.util.CopyBeanUtils;
 import cn.butterfly.tree.vo.SysDeptInfoVO;
+import cn.butterfly.tree.vo.SysDeptLazyTreeVO;
 import cn.butterfly.tree.vo.SysDeptTreeVO;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +49,24 @@ public class SysDeptController {
     public BaseResult<List<TreeSelectNode>> treeSelect() {
         List<SysDept> sysDeptList = sysDeptService.tree();
         return BaseResult.success(TreeMerger.mergeTreeSelectList(sysDeptList, SysDept::getName));
+    }
+
+    /**
+     * 根据 parentId 获取部门列表
+     *
+     * @param parentId parentId
+     * @return 部门列表
+     */
+    @GetMapping("/lazyTree/{parentId}")
+    public BaseResult<List<SysDeptLazyTreeVO>> lazyTree(@PathVariable("parentId") Long parentId) {
+        List<SysDept> sysDeptList = sysDeptService.getByParentId(parentId);
+        List<SysDeptLazyTreeVO> sysDeptLazyTreeVoList = new ArrayList<>();
+        for (SysDept sysDept : sysDeptList) {
+            SysDeptLazyTreeVO sysDeptLazyTreeVo = CopyBeanUtils.copy(sysDept, SysDeptLazyTreeVO::new);
+            sysDeptLazyTreeVo.setIsLeaf(sysDeptService.isLeaf(sysDept));
+            sysDeptLazyTreeVoList.add(sysDeptLazyTreeVo);
+        }
+        return BaseResult.success(sysDeptLazyTreeVoList);
     }
 
     /**
