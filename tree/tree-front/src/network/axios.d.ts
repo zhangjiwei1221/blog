@@ -1,10 +1,11 @@
+import {AxiosStatic} from "axios";
+
 declare module 'axios' {
-    interface IAxios<D = null> {
+    interface IAxios extends AxiosStatic {
         code: string
         message: string
-        extra: D
     }
-    // @ts-ignore
-    export interface AxiosResponse<T = any> extends IAxios<D> {}
+
+    export interface AxiosResponse<T = any> extends IAxios {}
 }
 
