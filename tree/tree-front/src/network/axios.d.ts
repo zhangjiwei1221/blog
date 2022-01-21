@@ -1,4 +1,4 @@
-import {AxiosStatic} from "axios";
+import {AxiosStatic} from 'axios'
 
 declare module 'axios' {
     interface IAxios extends AxiosStatic {
