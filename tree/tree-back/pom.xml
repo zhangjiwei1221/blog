@@ -18,7 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <druid.version>1.2.8</druid.version>
-        <mysql.version>8.0.25</mysql.version>
+        <mysql.version>8.0.27</mysql.version>
         <mybatis-plus.version>3.4.3.4</mybatis-plus.version>
         <lombok.version>1.18.22</lombok.version>
         <hutool.version>5.7.16</hutool.version>
