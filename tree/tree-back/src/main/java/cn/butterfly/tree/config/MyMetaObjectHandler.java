@@ -18,12 +18,12 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
 
 	@Override
 	public void insertFill(MetaObject metaObject) {
-		this.strictInsertFill(metaObject, BaseConstants.GMT_CREATE_FILED, LocalDateTime.class, LocalDateTime.now());
+		strictInsertFill(metaObject, BaseConstants.GMT_CREATE_FILED, LocalDateTime.class, LocalDateTime.now());
 	}
 
 	@Override
 	public void updateFill(MetaObject metaObject) {
-		this.strictUpdateFill(metaObject, BaseConstants.GMT_MODIFIED_FILED, LocalDateTime.class, LocalDateTime.now());
+		strictUpdateFill(metaObject, BaseConstants.GMT_MODIFIED_FILED, LocalDateTime.class, LocalDateTime.now());
 	}
 
 }

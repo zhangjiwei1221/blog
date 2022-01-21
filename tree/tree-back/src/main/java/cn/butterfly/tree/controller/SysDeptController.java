@@ -35,7 +35,7 @@ public class SysDeptController {
      */
     @GetMapping("/tree")
     public BaseResult<List<SysDeptTreeVO>> tree() {
-        List<SysDept> sysDeptList = sysDeptService.tree();
+        List<SysDept> sysDeptList = sysDeptService.list();
         List<SysDeptTreeVO> sysDeptTreeVoList = CopyBeanUtils.copyList(sysDeptList, SysDeptTreeVO::new);
         return BaseResult.success(TreeMerger.mergeTreeList(sysDeptTreeVoList));
     }
@@ -47,7 +47,7 @@ public class SysDeptController {
      */
     @GetMapping("/treeSelect")
     public BaseResult<List<TreeSelectNode>> treeSelect() {
-        List<SysDept> sysDeptList = sysDeptService.tree();
+        List<SysDept> sysDeptList = sysDeptService.list();
         return BaseResult.success(TreeMerger.mergeTreeSelectList(sysDeptList, SysDept::getName));
     }
 

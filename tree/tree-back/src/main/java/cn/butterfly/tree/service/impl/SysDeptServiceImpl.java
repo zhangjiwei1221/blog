@@ -22,11 +22,6 @@ import java.util.Objects;
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements ISysDeptService {
 
     @Override
-    public List<SysDept> tree() {
-        return baseMapper.tree();
-    }
-
-    @Override
     public List<SysDept> deptWithChildren(Long id) {
         SysDept sysDept = baseMapper.selectById(id);
         return baseMapper.selectList(new LambdaQueryWrapper<SysDept>()

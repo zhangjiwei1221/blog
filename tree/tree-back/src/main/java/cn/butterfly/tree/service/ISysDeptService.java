@@ -14,13 +14,6 @@ import java.util.List;
 public interface ISysDeptService extends IService<SysDept> {
 
     /**
-     * 获取部门树结构列表
-     *
-     * @return 部门树结构列表
-     */
-    List<SysDept> tree();
-
-    /**
      * 根据部门 id 查询指定部门及以下部门树结构列表
      *
      * @param id 部门 id
