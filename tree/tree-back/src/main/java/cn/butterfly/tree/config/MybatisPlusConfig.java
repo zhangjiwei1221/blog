@@ -1,5 +1,6 @@
 package cn.butterfly.tree.config;
 
+import cn.butterfly.tree.mapper.SysDeptMapper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -12,6 +13,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @EnableTransactionManagement
 @Configuration
-@MapperScan("cn.butterfly.**.mapper.**")
+@MapperScan(basePackageClasses = SysDeptMapper.class)
 public class MybatisPlusConfig {
 }
