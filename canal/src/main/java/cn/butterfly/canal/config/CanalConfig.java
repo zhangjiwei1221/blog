@@ -45,4 +45,9 @@ public class CanalConfig {
      */
     private Integer batchSize;
 
+    /**
+     * 启用
+     */
+    private Boolean enable;
+
 }

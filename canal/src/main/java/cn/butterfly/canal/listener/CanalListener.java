@@ -31,7 +31,9 @@ public class CanalListener {
 
     @PostConstruct
     private void init() {
-        listen();
+        if (Boolean.TRUE.equals(canalConfig.getEnable())) {
+            listen();
+        }
     }
 
     /**
