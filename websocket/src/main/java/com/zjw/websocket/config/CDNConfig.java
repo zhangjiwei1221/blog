@@ -14,9 +14,9 @@ public class CDNConfig implements ApplicationListener<ContextRefreshedEvent> {
         WebApplicationContext webApplicationContext = (WebApplicationContext) contextRefreshedEvent.getApplicationContext();
         ServletContext sc = webApplicationContext.getServletContext();
         ResourceBundle resource = ResourceBundle.getBundle("cdn");
-        for (Object key : resource.keySet()) {
+        for (String key : resource.keySet()) {
 			assert sc != null;
-			sc.setAttribute((String) key, resource.getString((String) key));
+			sc.setAttribute(key, resource.getString(key));
         }
     }
 }
