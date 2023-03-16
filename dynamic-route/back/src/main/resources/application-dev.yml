@@ -1,0 +1,24 @@
+server:
+  port: 80
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  typeAliasesPackage: cn.butterfly.**.entity.**
+  global-config:
+    banner: false
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+

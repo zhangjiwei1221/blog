@@ -1,0 +1,8 @@
+flinkcdc:
+  data-source:
+    addr: localhost:3306
+    database: flink
+    username: root
+    password: root
+    table-list:
+      - flink.user

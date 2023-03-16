@@ -1,0 +1,40 @@
+{
+  "properties": [
+    {
+      "name": "flinkcdc.data-source.addr",
+      "type": "java.lang.String",
+      "description": "格式 ip:port."
+    },
+    {
+      "name": "flinkcdc.data-source.database",
+      "type": "java.lang.String",
+      "description": "数据源数据库名."
+    },
+    {
+      "name": "flinkcdc.data-source.username",
+      "type": "java.lang.String",
+      "description": "数据源认证用户名."
+    },
+    {
+      "name": "flinkcdc.data-source.password",
+      "type": "java.lang.String",
+      "description": "数据源认证密码."
+    },
+    {
+      "name": "flinkcdc.data-source.include-scheme",
+      "type": "java.lang.Boolean",
+      "description": "是否包含 Scheme 处理, 默认 false.",
+      "defaultValue": false
+    },
+    {
+      "name": "flinkcdc.checkpoint.interval",
+      "type": "java.lang.Long",
+      "description": "检查点间隔, 默认 60s."
+    },
+    {
+      "name": "flinkcdc.checkpoint.save-dir",
+      "type": "java.lang.String",
+      "description": "检查点保存目录, 默认为: 项目目录/checkpoint."
+    }
+  ]
+}
