@@ -4,7 +4,6 @@ import cn.butterfly.flinkcdc.enums.DataSourceType;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +27,11 @@ public class DataSourceProperties {
      * 冒号.
      */
     public static final String COLON = ":";
+
+    /**
+     * 点.
+     */
+    public static final String DOT = ".";
 
     /**
      * 数据源类型, 默认为 MySQL.
@@ -65,7 +69,7 @@ public class DataSourceProperties {
     private DataSourceAddr dataSourceAddr;
 
     /**
-     * 表列表, 格式 schemaName.tableName.
+     * 表列表, 格式 tableName.
      */
     private List<String> tableList = new ArrayList<>();
 
@@ -79,10 +83,18 @@ public class DataSourceProperties {
         dataSourceProperties.setDataSourceAddr(new DataSourceAddr(this.addr));
         dataSourceProperties.setType(this.type);
         dataSourceProperties.setDatabase(this.database);
-        dataSourceProperties.setTableList(this.tableList);
         dataSourceProperties.setUsername(this.username);
         dataSourceProperties.setPassword(this.password);
         dataSourceProperties.setIncludeScheme(this.includeScheme);
+        var prefix = switch (this.type) {
+            case ORACLE -> this.username;
+            case MYSQL -> this.database;
+        };
+        var formatTableNameList = this.tableList.stream()
+                .filter(tableName -> !tableName.contains(DOT))
+                .map(tableName -> prefix + DOT + tableName)
+                .toList();
+        dataSourceProperties.setTableList(formatTableNameList);
         return dataSourceProperties;
     }
 
