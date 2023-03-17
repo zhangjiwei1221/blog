@@ -15,8 +15,8 @@
 
     <properties>
         <java.version>17</java.version>
-        <flink-connector.version>2.3.0</flink-connector.version>
-        <flink-plugin.version>1.14.1</flink-plugin.version>
+        <flink-connector.version>2.1.0</flink-connector.version>
+        <flink-plugin.version>1.13.0</flink-plugin.version>
     </properties>
 
     <dependencies>
@@ -42,7 +42,6 @@
             <artifactId>flink-streaming-java_2.12</artifactId>
             <version>${flink-plugin.version}</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.apache.flink</groupId>

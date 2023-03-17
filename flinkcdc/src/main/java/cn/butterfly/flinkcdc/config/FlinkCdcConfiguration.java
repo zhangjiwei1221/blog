@@ -73,6 +73,8 @@ public class FlinkCdcConfiguration {
     private SourceFunction<String> oracleSource(DataSourceProperties dataSourceProperties) {
         var dataSourceAddr = dataSourceProperties.getDataSourceAddr();
         var prop = new Properties();
+        // 详见 https://github.com/ververica/flink-cdc-connectors/wiki/FAQ(ZH)#oracle-cdc-faq Q2
+        prop.setProperty("database.tablename.case.insensitive", "false");
         // 详见 https://github.com/ververica/flink-cdc-connectors/wiki/FAQ(ZH)#%E9%80%9A%E7%94%A8-faq Q5
         prop.setProperty("bigint.unsigned.handling.mode","long");
         prop.setProperty("decimal.handling.mode","double");
