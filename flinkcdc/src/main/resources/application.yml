@@ -5,4 +5,4 @@ flinkcdc:
     username: root
     password: root
     table-list:
-      - flink.user
+      - user
