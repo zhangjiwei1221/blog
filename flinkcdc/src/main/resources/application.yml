@@ -3,8 +3,8 @@ flinkcdc:
     # 默认类型为 MySQL
     addr: localhost:3306
     database: flink
-    username: root
-    password: root
+    username: flink
+    password: flink
     table-list:
       - user
 #    type: oracle
