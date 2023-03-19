@@ -8,7 +8,6 @@ import com.ververica.cdc.debezium.JsonDebeziumDeserializationSchema;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.Properties;
 
 /**
@@ -73,17 +72,15 @@ public class FlinkCdcConfiguration {
     private SourceFunction<String> oracleSource(DataSourceProperties dataSourceProperties) {
         var dataSourceAddr = dataSourceProperties.getDataSourceAddr();
         var prop = new Properties();
+        // 详见 https://github.com/ververica/flink-cdc-connectors/wiki/FAQ(ZH)#oracle-cdc-faq Q1
+        prop.setProperty("log.mining.strategy", "online_catalog");
+        prop.setProperty("log.mining.continuous.mine", "true");
         // 详见 https://github.com/ververica/flink-cdc-connectors/wiki/FAQ(ZH)#oracle-cdc-faq Q2
         prop.setProperty("database.tablename.case.insensitive", "false");
         // 详见 https://github.com/ververica/flink-cdc-connectors/wiki/FAQ(ZH)#%E9%80%9A%E7%94%A8-faq Q5
         prop.setProperty("bigint.unsigned.handling.mode","long");
         prop.setProperty("decimal.handling.mode","double");
         Boolean includeDdl = dataSourceProperties.getIncludeScheme();
-        if (!Boolean.TRUE.equals(includeDdl)) {
-            // 详见 https://github.com/ververica/flink-cdc-connectors/wiki/FAQ(ZH)#oracle-cdc-faq Q1
-            prop.setProperty("log.mining.strategy", "online_catalog");
-            prop.setProperty("log.mining.continuous.mine", "true");
-        }
         return OracleSource.<String>builder()
                 .hostname(dataSourceAddr.hostname())
                 .port(dataSourceAddr.port())
