@@ -1,7 +1,7 @@
 package cn.butterfly.flinkcdc.pojo;
 
-import cn.butterfly.flinkcdc.enums.OpType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.debezium.data.Envelope;
 import lombok.Data;
 
 /**
@@ -32,6 +32,6 @@ public class Payload<T> {
     /**
      * 操作
      */
-    private OpType op;
+    private Envelope.Operation op;
 
 }

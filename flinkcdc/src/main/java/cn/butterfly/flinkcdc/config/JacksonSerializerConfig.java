@@ -1,12 +1,12 @@
 package cn.butterfly.flinkcdc.config;
 
-import cn.butterfly.flinkcdc.enums.OpType;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.debezium.data.Envelope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -34,10 +34,10 @@ public class JacksonSerializerConfig {
     public ObjectMapper serializingObjectMapper() {
         var javaTimeModule = new JavaTimeModule();
         javaTimeModule.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer());
-        javaTimeModule.addSerializer(OpType.class, new OpTypeSerializer());
+        javaTimeModule.addSerializer(Envelope.Operation.class, new OpTypeSerializer());
         var opTypeModule = new SimpleModule();
         opTypeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer());
-        opTypeModule.addDeserializer(OpType.class, new OpTypeDeserializer());
+        opTypeModule.addDeserializer(Envelope.Operation.class, new OpTypeDeserializer());
         return JsonMapper.builder()
                 .propertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE)
                 .configure(MapperFeature.ACCEPT_CASE_INSENSITIVE_PROPERTIES,true)
@@ -48,12 +48,12 @@ public class JacksonSerializerConfig {
     /**
      * OpType 序列化
      */
-    public static class OpTypeSerializer extends JsonSerializer<OpType> {
+    public static class OpTypeSerializer extends JsonSerializer<Envelope.Operation> {
 
         @Override
-        public void serialize(OpType opType, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        public void serialize(Envelope.Operation opType, JsonGenerator gen, SerializerProvider serializers) throws IOException {
             if (opType != null){
-                gen.writeString(opType.getType());
+                gen.writeString(opType.code());
             }
         }
 
@@ -62,11 +62,11 @@ public class JacksonSerializerConfig {
     /**
      * OpType 反序列化
      */
-    public static class OpTypeDeserializer extends JsonDeserializer<OpType> {
+    public static class OpTypeDeserializer extends JsonDeserializer<Envelope.Operation> {
 
         @Override
-        public OpType deserialize(JsonParser p, DeserializationContext deserializationContext) throws IOException {
-            return OpType.getObjWithType(p.getValueAsString());
+        public Envelope.Operation deserialize(JsonParser p, DeserializationContext deserializationContext) throws IOException {
+            return Envelope.Operation.forCode(p.getValueAsString());
         }
 
     }
