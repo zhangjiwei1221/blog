@@ -1,8 +1,16 @@
 flinkcdc:
   data-source:
+    # 默认类型为 MySQL
     addr: localhost:3306
     database: flink
     username: root
     password: root
     table-list:
       - user
+#    type: oracle
+#    addr: localhost:1521
+#    database: ORCL
+#    username: flink
+#    password: flink
+#    table-list:
+#      - user
