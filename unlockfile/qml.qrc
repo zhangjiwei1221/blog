@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/qml/main.qml</file>
+        <file>res/qml/dialog.qml</file>
+        <file>res/img/unlockfile.ico</file>
+    </qresource>
+</RCC>
