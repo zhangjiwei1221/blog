@@ -16,8 +16,8 @@ import java.lang.annotation.Target;
  * @author zjw
  * @date 2023-10-23
  */
-@JsonSerialize(using= DecryptSerializer.class)
-@JsonDeserialize(using= EncryptDeserializer.class)
+@JsonSerialize(using = DecryptSerializer.class)
+@JsonDeserialize(using = EncryptDeserializer.class)
 @JacksonAnnotationsInside
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
