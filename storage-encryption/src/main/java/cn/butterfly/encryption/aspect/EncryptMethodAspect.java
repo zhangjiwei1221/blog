@@ -15,6 +15,8 @@ import java.util.function.UnaryOperator;
 
 /**
  * 处理加密注解切面
+ * 特别注意, 这里的排序需要 + 1, 否则会报错, 具体原因参考链接: 
+ * <a href="https://blog.csdn.net/qq_18300037/article/details/128626005">...</a>
  *
  * @author zjw
  * @date 2023-11-07
