@@ -1,0 +1,39 @@
+<idea-plugin>
+    <!-- 插件唯一标识符 -->
+    <id>cn.butterfly.startup</id>
+
+    <!-- 插件名称 -->
+    <name>Startup</name>
+
+    <!-- 作者信息 -->
+    <vendor email="1945192314@qq.com" url="https://juejin.cn/user/3350967174567352">butterfly</vendor>
+
+    <!-- 插件描述, 支持 HTML 标签, 内容使用 <![CDATA[]] 进行包裹 -->
+    <description><![CDATA[
+        <h1>IntelliJ IDE 插件开发入门</h1>
+        <ul>
+            <li>1. 开发</li>
+            <li>2. 运行</li>
+            <li>3. 安装</li>
+        </ul>
+    ]]>
+    </description>
+
+    <!-- 后续用到再介绍, 可以先忽略 -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- 后续用到再介绍, 可以先忽略 -->
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+    
+    <actions>
+        <!-- 定义 id, 对应类和显示的文本 -->
+        <action id="HelloWorldAction" class="cn.butterfly.startup.HelloWorldAction" text="HelloWorldAction">
+            <!-- 添加到编辑器菜单的第一项 -->
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            
+            <!-- 可通过 ctrl + H 快捷键触发 -->
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl H"/>
+        </action>
+    </actions>
+</idea-plugin>

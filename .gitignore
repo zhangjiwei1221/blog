@@ -47,3 +47,6 @@ package-lock.json
 
 ### VS Code ###
 .vscode/
+
+*.gradle/
+gradle/
