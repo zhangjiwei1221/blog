@@ -22,6 +22,14 @@
     <depends>com.intellij.modules.platform</depends>
     
     <extensions defaultExtensionNs="com.intellij">
-
+        <projectConfigurable
+                instance="cn.butterfly.ui.config.UISettingsConfig"
+                id="cn.butterfly.ui.config.UISettingsConfig"
+                displayName="UISettingsConfig"/>
+        
+        <toolWindow id="UISettingsConfig" 
+                    anchor="right"
+                    factoryClass="cn.butterfly.ui.config.UISidebarConfig"
+                    icon="cn.butterfly.ui.icons.PluginIcons.BUTTERFLY"/>
     </extensions>
 </idea-plugin>
