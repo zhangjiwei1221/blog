@@ -22,6 +22,36 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-
+        <notificationGroup id="listener" displayType="BALLOON"/>
+        
+        <editorNotificationProvider implementation="cn.butterfly.listener.ui.EditorBanner"/>
+        
+        <postStartupActivity implementation="cn.butterfly.listener.listener.MyProjectActivity"/>
     </extensions>
+    
+    <projectListeners>
+        <listener class="cn.butterfly.listener.listener.MyProjectManagerListener"
+                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
+        
+        <listener class="cn.butterfly.listener.listener.MyListenerA"
+                  topic="cn.butterfly.listener.listener.MyListener"/>
+    </projectListeners>
+    
+    <actions>
+        <action id="NoticeAction" class="cn.butterfly.listener.action.NoticeAction" text="NoticeAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        
+        <action id="DialogAction" class="cn.butterfly.listener.action.DialogAction" text="DialogAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        
+        <action id="HintAction" class="cn.butterfly.listener.action.HintAction" text="HintAction">
+            <keyboard-shortcut first-keystroke="alt H" keymap="$default"/>
+        </action>
+        
+        <action id="PopupAction" class="cn.butterfly.listener.action.PopupAction" text="PopupAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
