@@ -1,0 +1,39 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- 插件唯一标识符 -->
+    <id>cn.butterfly.timermaster</id>
+
+    <!-- 插件名称 -->
+    <name>TimerMaster</name>
+
+    <!-- 作者信息 -->
+    <vendor email="1945192314@qq.com" url="https://juejin.cn/user/3350967174567352">butterfly</vendor>
+
+    <!-- 插件描述, 支持 HTML 标签, 内容使用 <![CDATA[]] 进行包裹 -->
+    <description><![CDATA[
+        <h1>模仿 VSCode 的 TimerMaster 插件</h1>
+        <ul>
+            <li>1. 记录编辑器的使用情况</li>
+            <li>2. 统计编码量</li>
+        </ul>
+    ]]>
+    </description>
+    
+    <depends>com.intellij.modules.platform</depends>
+    
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable
+            instance="cn.butterfly.timermaster.config.TimerMasterConfig"
+            id="cn.butterfly.timermaster.config.TimerMasterConfig"
+            displayName="TimerMaster"/>
+        
+        <notificationGroup id="timermaster" displayType="BALLOON"/>
+        
+	    <postStartupActivity implementation="cn.butterfly.timermaster.listener.ProjectStartListener"/>
+    </extensions>
+    
+    <projectListeners>
+        <listener class="cn.butterfly.timermaster.listener.ProjectCloseListener"
+                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </projectListeners>
+</idea-plugin>
