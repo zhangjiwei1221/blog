@@ -30,10 +30,9 @@
         <notificationGroup id="timermaster" displayType="BALLOON"/>
         
 	    <postStartupActivity implementation="cn.butterfly.timermaster.listener.ProjectStartListener"/>
+        
+        <editorFactoryListener implementation="cn.butterfly.timermaster.listener.EditorListener"/>
+        
+        <copyPastePreProcessor implementation="cn.butterfly.timermaster.listener.CopyPasteListener"/>
     </extensions>
-    
-    <projectListeners>
-        <listener class="cn.butterfly.timermaster.listener.ProjectCloseListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </projectListeners>
 </idea-plugin>

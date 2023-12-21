@@ -10,5 +10,11 @@ import cn.butterfly.timermaster.util.Utils
  */
 data class StatisticsData(
     var runTime: Long = 0,
+    var activeTime: Long = 0,
+    var keyCount: Long = 0,
+    var addLineCount: Long = 0,
+    var removeLineCount: Long = 0,
+    var copyCount: Long = 0,
+    var pasteCount: Long = 0,
     var createDate: String = Utils.getYmd()
 )
