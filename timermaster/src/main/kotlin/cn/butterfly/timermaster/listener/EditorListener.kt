@@ -20,7 +20,7 @@ class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretLis
             event.editor.document.addDocumentListener(this)
             // 监听光标移动事件
             event.editor.caretModel.addCaretListener(this)
-        } catch (e: Exception) {
+        } catch (e: Throwable) {
             // 忽略报错
         }
     }
