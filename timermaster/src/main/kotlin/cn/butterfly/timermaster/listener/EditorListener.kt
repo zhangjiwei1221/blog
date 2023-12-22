@@ -13,16 +13,19 @@ import com.intellij.openapi.editor.event.*
 class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretListener {
     
     private val state = TimerMasterState.getInstance()
+    
+    private val projectSet = mutableSetOf<String>()
 
     override fun editorCreated(event: EditorFactoryEvent) {
-        try {
-            // 监听编辑操作
-            event.editor.document.addDocumentListener(this)
-            // 监听光标移动事件
-            event.editor.caretModel.addCaretListener(this)
-        } catch (e: Throwable) {
-            // 忽略报错
+        val hash = event.editor.project?.locationHash
+        if (hash == null || hash in projectSet) {
+            return
         }
+        // 监听编辑操作
+        event.editor.document.addDocumentListener(this)
+        // 监听光标移动事件
+        event.editor.caretModel.addCaretListener(this)
+        projectSet.add(hash)
     }
     
     override fun documentChangedNonBulk(event: DocumentEvent) {
