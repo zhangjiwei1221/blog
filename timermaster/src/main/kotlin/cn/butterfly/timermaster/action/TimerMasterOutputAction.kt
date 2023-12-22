@@ -37,14 +37,16 @@ class TimerMasterOutputAction: AnAction() {
         // 获取每天的平均数据(不含当天)
         val averageData = statistics(list).let {
             val count = list.size
-            it.runTime /= count
-            it.activeTime /= count
-            it.addLineCount /= count
-            it.removeLineCount /= count
-            it.keyCount /= count
-            it.copyCount /= count
-            it.pasteCount /= count
-            it.pushCount /= count
+            if (count != 0) {
+                it.runTime /= count
+                it.activeTime /= count
+                it.addLineCount /= count
+                it.removeLineCount /= count
+                it.keyCount /= count
+                it.copyCount /= count
+                it.pasteCount /= count
+                it.pushCount /= count
+            }
             it
         }
         val average = "🐲 Average of Day${System.lineSeparator()}${getBodyContent(averageData)}"
