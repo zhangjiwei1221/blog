@@ -13,16 +13,15 @@ import com.intellij.openapi.editor.event.*
 class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretListener {
     
     private val state = TimerMasterState.getInstance()
-    
-    private var exist = false
 
     override fun editorCreated(event: EditorFactoryEvent) {
-        if (!exist) {
+        try {
             // 监听编辑操作
             event.editor.document.addDocumentListener(this)
             // 监听光标移动事件
             event.editor.caretModel.addCaretListener(this)
-            exist = true
+        } catch (e: Exception) {
+            // 忽略报错
         }
     }
     
