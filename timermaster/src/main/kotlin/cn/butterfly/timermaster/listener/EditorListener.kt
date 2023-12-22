@@ -13,17 +13,22 @@ import com.intellij.openapi.editor.event.*
 class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretListener {
     
     private val state = TimerMasterState.getInstance()
+    
+    private var exist = false
 
     override fun editorCreated(event: EditorFactoryEvent) {
-        // 监听编辑操作
-        event.editor.document.addDocumentListener(this)
-        // 监听光标移动事件
-        event.editor.caretModel.addCaretListener(this)
+        if (!exist) {
+            // 监听编辑操作
+            event.editor.document.addDocumentListener(this)
+            // 监听光标移动事件
+            event.editor.caretModel.addCaretListener(this)
+            exist = true
+        }
     }
     
     override fun documentChangedNonBulk(event: DocumentEvent) {
         val data = Utils.initData()
-        event.takeIf { it.oldFragment.isNotEmpty() or it.newFragment.isNotEmpty() }?.let {
+        event.takeIf { (it.oldFragment.isNotEmpty() or it.newFragment.isNotEmpty()) and !it.newFragment.startsWith("🐻 Today") }?.let {
             ++data.keyCount
             // 根据文档代码段变更信息判断是新增还是删除行
             if (it.oldFragment.startsWith('\n')) {
