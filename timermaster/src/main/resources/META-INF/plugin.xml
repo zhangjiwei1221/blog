@@ -20,6 +20,7 @@
     </description>
     
     <depends>com.intellij.modules.platform</depends>
+    <depends>Git4Idea</depends>
     
     <extensions defaultExtensionNs="com.intellij">
         <applicationConfigurable
@@ -34,5 +35,22 @@
         <editorFactoryListener implementation="cn.butterfly.timermaster.listener.EditorListener"/>
         
         <copyPastePreProcessor implementation="cn.butterfly.timermaster.listener.CopyPasteListener"/>
+        
+        <toolWindow factoryClass="cn.butterfly.timermaster.window.ConsoleWindow"
+                    id="TimerMaster Console"
+                    anchor="bottom"/>
     </extensions>
+    
+    <projectListeners>
+        <listener class="cn.butterfly.timermaster.listener.GitListener"
+                  topic="git4idea.push.GitPushListener"/>
+    </projectListeners>
+    
+    <actions>
+        <action class="cn.butterfly.timermaster.action.TimerMasterOutputAction"
+                id="TimerMasterOutputAction"
+                text="TimerMasterOutput">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>

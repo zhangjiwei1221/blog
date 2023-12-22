@@ -33,7 +33,7 @@ class ProjectStartListener: ProjectActivity, Disposable {
                 state.runProjectPath.takeIf { it == projectPath || it.isBlank() || firstOrNull == null }.let { 
                     state.runProjectPath = projectPath
                     val data = Utils.parse(state.statisticsData, TypeToken.get(StatisticsData::class.java))
-                    if (data.createDate == Utils.getYmd()) {
+                    if (data.createDate == Utils.getTodayYmd()) {
                         data.runTime += state.updateInterval
                         if (active) {
                             data.activeTime += state.updateInterval

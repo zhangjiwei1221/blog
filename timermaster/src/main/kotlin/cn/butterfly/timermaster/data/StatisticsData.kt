@@ -16,5 +16,6 @@ data class StatisticsData(
     var removeLineCount: Long = 0,
     var copyCount: Long = 0,
     var pasteCount: Long = 0,
-    var createDate: String = Utils.getYmd()
+    var pushCount: Long = 0,
+    var createDate: String = Utils.getTodayYmd()
 )

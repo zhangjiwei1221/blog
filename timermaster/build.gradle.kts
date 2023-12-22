@@ -19,12 +19,12 @@ dependencies {
 // 配置开发过程中运行的 IDEA 沙盒信息
 intellij {
     // IDEA 的版本
-    version.set("2023.2.5")
+    version.set("2023.3.1")
     // 这里 IU 是指付费版, 也可以选择 IC 对应社区版
     type.set("IU")
 
     // 用到的插件
-    plugins.set(listOf())
+    plugins.set(listOf("Git4Idea"))
 }
 
 tasks {
@@ -40,6 +40,6 @@ tasks {
     // 设置插件兼容的版本
     patchPluginXml {
         sinceBuild.set("222")
-        untilBuild.set("232.*")
+        untilBuild.set("233.*")
     }
 }
