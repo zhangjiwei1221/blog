@@ -17,7 +17,7 @@ class ConsoleWindow: ToolWindowFactory {
         if (Utils.getConsoleViews()[project] == null) {
             Utils.createToolWindow(project, toolWindow)
         }
-        Utils.toolWindow = toolWindow
+        Utils.toolWindows[project] = toolWindow
     }
 
 }

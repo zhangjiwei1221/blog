@@ -31,7 +31,7 @@ class Utils {
         
         private var consoleViews: MutableMap<Project, ConsoleView> = mutableMapOf()
         
-        var toolWindow: ToolWindow? = null
+        var toolWindows: MutableMap<Project, ToolWindow> = mutableMapOf()
         
         fun info(msg: String) {
             Notifications.Bus.notify(Notification("timermaster", msg, NotificationType.INFORMATION))
@@ -80,7 +80,7 @@ class Utils {
             }
             consoleViews[project]?.clear()
             consoleViews[project]?.print(msg, ConsoleViewContentType.NORMAL_OUTPUT)
-            toolWindow?.activate(null, false)
+            toolWindows[project]?.activate(null, false)
         }
         
         fun createToolWindow(project: Project, toolWindow: ToolWindow) {
