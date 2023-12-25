@@ -30,8 +30,11 @@ class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretLis
     
     override fun documentChangedNonBulk(event: DocumentEvent) {
         val data = Utils.initData()
-        event.takeIf { (it.oldFragment.isNotEmpty() or it.newFragment.isNotEmpty()) and !it.newFragment.startsWith("🐻 Today") }?.let {
-            ++data.keyCount
+        event.takeIf { (it.oldFragment.isNotEmpty() or it.newFragment.isNotEmpty()) }?.let {
+            // 只对字符长度为 1 和非空空白符的情况进行统计
+            if (it.newFragment.isNotEmpty() && (it.newFragment.length == 1 || it.newFragment.trim().isEmpty())) {
+                ++data.keyCount
+            }
             // 根据文档代码段变更信息判断是新增还是删除行
             if (it.oldFragment.startsWith('\n')) {
                 ++data.removeLineCount
