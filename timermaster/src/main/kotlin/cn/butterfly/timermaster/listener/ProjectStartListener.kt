@@ -30,7 +30,7 @@ class ProjectStartListener: ProjectActivity, Disposable {
                 val projectPath = project.locationHash
                 val firstOrNull = ProjectManager.getInstance().openProjects.firstOrNull { it.locationHash == state.runProjectPath }
                 val active = (System.currentTimeMillis() - state.activeTime) / 1000 <= state.activeInterval
-                state.runProjectPath.takeIf { it == projectPath || it.isBlank() || firstOrNull == null }.let { 
+                state.runProjectPath.takeIf { it == projectPath || it.isBlank() || firstOrNull == null }?.let { 
                     state.runProjectPath = projectPath
                     val data = Utils.parse(state.statisticsData, TypeToken.get(StatisticsData::class.java))
                     if (data.createDate == Utils.getTodayYmd()) {
