@@ -2,8 +2,8 @@ package cn.butterfly.timermaster.listener
 
 import cn.butterfly.timermaster.state.TimerMasterState
 import cn.butterfly.timermaster.util.Utils
-import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.event.*
+import com.intellij.openapi.fileEditor.FileDocumentManager
 
 /**
  * 编辑器事件监听
@@ -14,21 +14,22 @@ import com.intellij.openapi.editor.event.*
 class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretListener {
     
     private val state = TimerMasterState.getInstance()
-    
-    private val editorSet = mutableSetOf<Editor>()
 
     override fun editorCreated(event: EditorFactoryEvent) {
-        val editor = event.editor
-        if (editor in editorSet) {
-            return
-        }
+        FileDocumentManager.getInstance().getFile(event.editor.document) ?: return
         // 监听编辑操作
         event.editor.document.addDocumentListener(this)
         // 监听光标移动事件
         event.editor.caretModel.addCaretListener(this)
-        editorSet.add(editor)
     }
-    
+
+    override fun editorReleased(event: EditorFactoryEvent) {
+        FileDocumentManager.getInstance().getFile(event.editor.document) ?: return
+        // 移除监听器
+        event.editor.document.removeDocumentListener(this)
+        event.editor.caretModel.removeCaretListener(this)
+    }
+
     override fun documentChangedNonBulk(event: DocumentEvent) {
         val data = Utils.initData()
         event.takeIf { (it.oldFragment.isNotEmpty() or it.newFragment.isNotEmpty()) }?.let {
