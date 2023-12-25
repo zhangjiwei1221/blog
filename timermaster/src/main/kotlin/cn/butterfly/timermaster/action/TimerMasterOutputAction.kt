@@ -33,7 +33,7 @@ class TimerMasterOutputAction: AnAction() {
         // 获取过去 7 天的数据
         val weekYmd = Utils.getYmd(LocalDate.now().minusDays(7))
         val weekData = statistics(list, weekYmd)
-        val week = "🐯 Last 7 days ($weekYmd - $yesterdayYmd)${System.lineSeparator()}${getBodyContent(weekData)}"
+        val week = "🐯 Last 7 days ($weekYmd ~ $yesterdayYmd)${System.lineSeparator()}${getBodyContent(weekData)}"
         // 获取每天的平均数据(不含当天)
         val averageData = statistics(list).let {
             val count = list.size
