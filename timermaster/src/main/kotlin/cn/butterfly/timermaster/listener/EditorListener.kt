@@ -2,6 +2,7 @@ package cn.butterfly.timermaster.listener
 
 import cn.butterfly.timermaster.state.TimerMasterState
 import cn.butterfly.timermaster.util.Utils
+import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.event.*
 
 /**
@@ -14,18 +15,18 @@ class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretLis
     
     private val state = TimerMasterState.getInstance()
     
-    private val projectSet = mutableSetOf<String>()
+    private val editorSet = mutableSetOf<Editor>()
 
     override fun editorCreated(event: EditorFactoryEvent) {
-        val hash = event.editor.project?.locationHash
-        if (hash == null || hash in projectSet) {
+        val editor = event.editor
+        if (editor in editorSet) {
             return
         }
         // 监听编辑操作
         event.editor.document.addDocumentListener(this)
         // 监听光标移动事件
         event.editor.caretModel.addCaretListener(this)
-        projectSet.add(hash)
+        editorSet.add(editor)
     }
     
     override fun documentChangedNonBulk(event: DocumentEvent) {
