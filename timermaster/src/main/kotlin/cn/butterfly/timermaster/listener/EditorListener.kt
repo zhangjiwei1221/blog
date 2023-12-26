@@ -39,10 +39,10 @@ class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretLis
             }
             // 根据文档代码段变更信息判断是新增还是删除行
             if (it.oldFragment.contains('\n')) {
-                data.removeLineCount += it.oldFragment.count { item -> item == '\n' } 
+                data.removeLineCount += it.oldFragment.count { item -> item == '\n' }
             }
-            if (it.newFragment.startsWith('\n')) {
-                ++data.addLineCount
+            if (it.newFragment.contains('\n')) {
+                data.addLineCount += it.newFragment.count { item -> item == '\n' }
             }
         }
         state.statisticsData = Utils.stringify(data)
