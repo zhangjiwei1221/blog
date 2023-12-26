@@ -14,9 +14,15 @@ import com.intellij.openapi.fileEditor.FileDocumentManager
 class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretListener {
     
     private val state = TimerMasterState.getInstance()
+    
+    private val fileSet = mutableSetOf<String>()
 
     override fun editorCreated(event: EditorFactoryEvent) {
-        FileDocumentManager.getInstance().getFile(event.editor.document) ?: return
+        val file = FileDocumentManager.getInstance().getFile(event.editor.document) ?: return
+        if (file.path in fileSet) {
+            return
+        }
+        fileSet.add(file.path)
         // 监听编辑操作
         event.editor.document.addDocumentListener(this)
         // 监听光标移动事件
@@ -24,7 +30,8 @@ class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretLis
     }
 
     override fun editorReleased(event: EditorFactoryEvent) {
-        FileDocumentManager.getInstance().getFile(event.editor.document) ?: return
+        val file = FileDocumentManager.getInstance().getFile(event.editor.document) ?: return
+        fileSet.remove(file.path)
         // 移除监听器
         event.editor.document.removeDocumentListener(this)
         event.editor.caretModel.removeCaretListener(this)
