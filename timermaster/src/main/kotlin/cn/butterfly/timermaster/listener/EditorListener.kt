@@ -23,18 +23,26 @@ class EditorListener: EditorFactoryListener, BulkAwareDocumentListener, CaretLis
             return
         }
         fileSet.add(file.path)
-        // 监听编辑操作
-        event.editor.document.addDocumentListener(this)
-        // 监听光标移动事件
-        event.editor.caretModel.addCaretListener(this)
+        try {
+            // 监听编辑操作
+            event.editor.document.addDocumentListener(this)
+            // 监听光标移动事件
+            event.editor.caretModel.addCaretListener(this)
+        } catch (e: Throwable) {
+            // 忽略异常
+        }
     }
 
     override fun editorReleased(event: EditorFactoryEvent) {
         val file = FileDocumentManager.getInstance().getFile(event.editor.document) ?: return
         fileSet.remove(file.path)
         // 移除监听器
-        event.editor.document.removeDocumentListener(this)
-        event.editor.caretModel.removeCaretListener(this)
+        try {
+            event.editor.document.removeDocumentListener(this)
+            event.editor.caretModel.removeCaretListener(this)
+        } catch (e: Throwable) {
+            // 忽略异常
+        }
     }
 
     override fun documentChangedNonBulk(event: DocumentEvent) {
