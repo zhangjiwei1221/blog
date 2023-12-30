@@ -17,12 +17,8 @@ class UISidebarConfig: ToolWindowFactory {
     
     private val form = UIDemo()
 
-    private val component: JComponent
-    
-    init {
-        component = form.mainPanel
-    }
-    
+    private val component: JComponent = form.mainPanel
+
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         toolWindow.contentManager.addContent(ContentFactory.getInstance().createContent(component, "", false))
     }
