@@ -26,6 +26,24 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-
+        <notificationGroup id="vfs" displayType="BALLOON"/>
+        
+        <postStartupActivity implementation="cn.butterfly.vfs.listener.ProjectStartListener"/>
+        
+        <postStartupActivity implementation="cn.butterfly.vfs.listener.EditorCopyListener"/>
+        
+        <typedHandler implementation="cn.butterfly.vfs.listener.KeyboardListener"/>
     </extensions>
+    
+    <actions>
+        <action id="VFSAction" class="cn.butterfly.vfs.action.VFSAction" text="VFSAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        
+        <action id="EditorAction" class="cn.butterfly.vfs.action.EditorAction" text="EditorAction">
+            <keyboard-shortcut first-keystroke="alt e" keymap="$default"/>
+            
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
