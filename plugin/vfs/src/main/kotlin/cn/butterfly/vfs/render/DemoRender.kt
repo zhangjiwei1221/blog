@@ -53,19 +53,18 @@ class DemoRender<T>(
         val linePadding = (lineHeight - fontBaseline) / 2.0
         val offsetX = targetRegion.x
         val offsetY = targetRegion.y + fontBaseline + linePadding
-        val lineOffset = 0
         g2.font = font
         g2.color = JBColor.GRAY
         when (renderText) {
             is String -> {
-                g2.drawString(renderText, offsetX.toFloat(), (offsetY + lineOffset).toFloat())
+                g2.drawString(renderText, offsetX.toFloat(), offsetY.toFloat())
             }
             is MutableList<*> -> {
                 // 多行文本渲染的时候设置缩进
                 val tabSize = editor.settings.getTabSize(editor.project)
                 val startOffset = calcTextWidth("Z") * (wordCount + tabSize)
                 renderText.forEach {
-                    g2.drawString(it.toString(), startOffset, (offsetY + lineOffset).toFloat())
+                    g2.drawString(it.toString(), startOffset, offsetY.toFloat())
                     g2.translate(0.0, lineHeight)
                 }
             }
