@@ -50,3 +50,9 @@ package-lock.json
 
 *.gradle/
 gradle/
+
+x64/
+.vs/
+*.aps
+*.log
+*.vcxproj*
