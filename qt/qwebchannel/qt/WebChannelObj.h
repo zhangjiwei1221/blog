@@ -24,14 +24,15 @@ signals:
     /// <summary>
     /// 信息变更事件
     /// </summary>
-    void infoChanged(const QJsonDocument& config);
+    /// <param name="info">文件信息</param>
+    void infoChanged(const QJsonDocument& info);
 
 public slots:
 
     /// <summary>
-    /// 获取信息
+    /// 获取文件信息
     /// </summary>
-    /// <returns>信息</returns>
+    /// <returns>转为 JSON 格式的文件信息</returns>
     QJsonDocument getInfo();
 
     /// <summary>

@@ -10,7 +10,7 @@ WebChannelServer::WebChannelServer()
 
 void WebChannelServer::startServer()
 {
-    m_websocketServer = new QWebSocketServer("xshouseWebchannel", QWebSocketServer::NonSecureMode, this);
+    m_websocketServer = new QWebSocketServer("Webchannel", QWebSocketServer::NonSecureMode, this);
     if (m_websocketServer->listen(QHostAddress::Any, 9999))
     {
         connect(m_websocketServer, &QWebSocketServer::newConnection, this, &WebChannelServer::onNewConnection);

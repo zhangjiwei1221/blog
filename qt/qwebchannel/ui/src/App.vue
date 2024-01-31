@@ -29,6 +29,7 @@ export default {
   name: 'App',
   data() {
     return {
+      // 文件列表
       fileList: []
     }
   },
