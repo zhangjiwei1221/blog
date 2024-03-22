@@ -1,0 +1,37 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- 插件唯一标识符 -->
+    <id>cn.butterfly.psi</id>
+
+    <!-- 插件名称 -->
+    <name>PSI</name>
+
+    <!-- 作者信息 -->
+    <vendor email="1945192314@qq.com" url="https://juejin.cn/user/3350967174567352">butterfly</vendor>
+
+    <!-- 插件描述, 支持 HTML 标签, 内容使用 <![CDATA[]] 进行包裹 -->
+    <description><![CDATA[
+        <h1>IntelliJ IDE 插件 PSI 使用详解</h1>
+        <ul>
+            <li>PSI 使用详解</li>
+            <li>...</li>
+        </ul>
+    ]]>
+    </description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+    <depends>com.intellij.modules.xml</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <codeInsight.lineMarkerProvider language="JAVA"
+                                        implementationClass="cn.butterfly.psi.provider.JavaMapperLineMarkerProvider"/>
+        
+        <codeInsight.lineMarkerProvider language="XML"
+                                        implementationClass="cn.butterfly.psi.provider.XmlMapperLineMarkerProvider"/>
+    </extensions>
+</idea-plugin>
