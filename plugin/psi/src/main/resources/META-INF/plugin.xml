@@ -32,6 +32,6 @@
                                         implementationClass="cn.butterfly.psi.provider.JavaMapperLineMarkerProvider"/>
         
         <codeInsight.lineMarkerProvider language="XML"
-                                        implementationClass="cn.butterfly.psi.provider.XmlMapperLineMarkerProvider"/>
+                                        implementationClass="cn.butterfly.psi.provider.XMLMapperLineMarkerProvider"/>
     </extensions>
 </idea-plugin>

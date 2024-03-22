@@ -13,12 +13,12 @@ import com.intellij.psi.xml.XmlAttributeValue
 import com.intellij.psi.xml.XmlFile
 
 /**
- * mapper 类行标记配置
+ * mapper XML 文件行标记配置
  *
  * @author zjw
  * @date 2024-03-07
  */
-class XmlMapperLineMarkerProvider: RelatedItemLineMarkerProvider() {
+class XMLMapperLineMarkerProvider: RelatedItemLineMarkerProvider() {
 
     override fun collectNavigationMarkers(
         element: PsiElement,
