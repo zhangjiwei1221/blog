@@ -9,7 +9,7 @@ import com.intellij.psi.*
 import com.intellij.psi.search.FileTypeIndex
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.util.PsiTreeUtil
-import com.intellij.psi.xml.XmlAttributeValue
+import com.intellij.psi.xml.XmlAttribute
 
 
 /**
@@ -38,14 +38,14 @@ class JavaMapperLineMarkerProvider: RelatedItemLineMarkerProvider() {
         val virtualFile = FileTypeIndex.getFiles(XmlFileType.INSTANCE, GlobalSearchScope.allScope(element.project))
             .first { it.name.startsWith(className) }
         val psiFile = PsiManager.getInstance(element.project).findFile(virtualFile)
-        
-        // 遍历 XML 文件中节点值等于 Java 方法名的元素, 然后添加可跳转的行标记符
+
+        // 遍历 XML 文件中标签 id 节点值等于 Java 方法名的元素, 然后添加可跳转的行标记符
         psiFile?.accept(object : XmlRecursiveElementVisitor() {
-            override fun visitXmlAttributeValue(xmlAttributeValue: XmlAttributeValue) {
-                if (xmlAttributeValue.value == element.name) {
+            override fun visitXmlAttribute(attribute: XmlAttribute) {
+                if (attribute.name == "id" && attribute.value == element.name) {
                     result.add(
                         NavigationGutterIconBuilder.create(PluginIcons.MAPPER_ICON)
-                            .setTargets(setOf(xmlAttributeValue.navigationElement))
+                            .setTargets(setOf(attribute.navigationElement))
                             .setTooltipText("Navigation to target in mapper xml").createLineMarkerInfo(element)
                     )
                 }

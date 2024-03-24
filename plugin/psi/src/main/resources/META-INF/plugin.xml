@@ -28,10 +28,22 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="psi" displayType="BALLOON"/>
+        
         <codeInsight.lineMarkerProvider language="JAVA"
                                         implementationClass="cn.butterfly.psi.provider.JavaMapperLineMarkerProvider"/>
         
         <codeInsight.lineMarkerProvider language="XML"
                                         implementationClass="cn.butterfly.psi.provider.XMLMapperLineMarkerProvider"/>
     </extensions>
+    
+    <actions>
+        <action id="PsiJavaAction" class="cn.butterfly.psi.action.PsiJavaAction" text="PsiJavaAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+        
+        <action id="PsiXMLAction" class="cn.butterfly.psi.action.PsiXMLAction" text="PsiXMLAction">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
