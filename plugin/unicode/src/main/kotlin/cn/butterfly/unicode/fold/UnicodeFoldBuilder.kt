@@ -25,13 +25,15 @@ class UnicodeFoldBuilder: FoldingBuilderEx() {
         }?.map {
             // 获取折叠区域，这里只截取键值对中的值部分
             val startOffset = it.psiElement.startOffset + it.key!!.length + 1
-            FoldingDescriptor(it.psiElement.node, TextRange(startOffset, startOffset + it.value!!.length))
+            val endOffset = startOffset + it.value!!.length
+            FoldingDescriptor(it.psiElement.node, TextRange(startOffset, endOffset))
         }?.toTypedArray() ?: emptyArray()
 
     /**
      * 用于判断字符串中是否包含 Unicode 编码过的字符
      */
-    private fun containsUnicodeEscapeSequence(str: String) = Regex("\\\\u[0-9a-fA-F]{4}").containsMatchIn(str)
+    private fun containsUnicodeEscapeSequence(str: String) =
+        Regex("\\\\u[0-9a-fA-F]{4}").containsMatchIn(str)
 
     /**
      * 将 Unicode 编码的字符进行反编码
@@ -43,7 +45,8 @@ class UnicodeFoldBuilder: FoldingBuilderEx() {
     /**
      * 用于将字符串转为 Unicode 编码
      */
-    private fun decodeUnicode(input: String) = input.replace("\\\\u([0-9a-fA-F]{4})".toRegex()) {
+    private fun decodeUnicode(input: String) = input.replace("\\\\u([0-9a-fA-F]{4})".toRegex())
+    {
         it.groupValues[1].toInt(16).toChar().toString()
     }
 
