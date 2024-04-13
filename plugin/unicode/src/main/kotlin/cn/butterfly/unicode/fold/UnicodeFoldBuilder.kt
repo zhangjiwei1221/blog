@@ -37,10 +37,10 @@ class UnicodeFoldBuilder: FoldingBuilderEx() {
 
     /**
      * 将 Unicode 编码的字符进行反编码
+     * 这里只对键值对中的值进行反编码，通过截取原始文本中 = 后的内容
      */
-    override fun getPlaceholderText(node: ASTNode): String {
-        return decodeUnicode(node.text.substring(node.text.indexOf("=") + 1))
-    }
+    override fun getPlaceholderText(node: ASTNode) = 
+        decodeUnicode(node.text.substring(node.text.indexOf("=") + 1))
 
     /**
      * 用于将字符串转为 Unicode 编码
