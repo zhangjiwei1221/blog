@@ -14,6 +14,7 @@
         <h1>IntelliJ IDE 主题类插件开发入门</h1>
         <ul>
             <li>主题类插件开发入门</li>
+            <li>插件开发配置</li>
         </ul>
     ]]>
     </description>
@@ -21,5 +22,8 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
-    
+
+    <extensions defaultExtensionNs="com.intellij">
+        <themeProvider id="025ea689-e5ab-477d-9145-f1f7c41e0726" path="/demo.theme.json"/>
+    </extensions>
 </idea-plugin>
