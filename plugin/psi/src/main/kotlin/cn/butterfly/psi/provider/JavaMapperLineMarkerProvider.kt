@@ -29,6 +29,7 @@ class JavaMapperLineMarkerProvider: RelatedItemLineMarkerProvider() {
             return
         }
         val psiClass = PsiTreeUtil.getParentOfType(element, PsiClass::class.java) ?: return
+        val identifier = PsiTreeUtil.getChildOfType(element, PsiIdentifier::class.java) ?: return
         val className = psiClass.name ?: return
         if (!className.endsWith("Mapper")) {
             return
@@ -46,7 +47,8 @@ class JavaMapperLineMarkerProvider: RelatedItemLineMarkerProvider() {
                     result.add(
                         NavigationGutterIconBuilder.create(PluginIcons.MAPPER_ICON)
                             .setTargets(setOf(attribute.navigationElement))
-                            .setTooltipText("Navigation to target in mapper xml").createLineMarkerInfo(element)
+                            .setTooltipText("Navigation to target in mapper xml")
+                            .createLineMarkerInfo(identifier)
                     )
                 }
             }
