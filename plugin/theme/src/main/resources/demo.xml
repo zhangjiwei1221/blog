@@ -1,2 +1,5 @@
 <scheme name="demo" version="142" parent_scheme="Darcula">
+    <colors>
+        <option name="LINE_NUMBERS_COLOR" value="409EFF"/>
+    </colors>
 </scheme>

@@ -3,6 +3,19 @@
   "dark": true,
   "author": "butterfly",
   "editorScheme": "/demo.xml",
+  "colors": {
+    "demoColor": "#409EFF"
+  },
   "ui": {
+    "RunWidget.foreground": "demoColor"
+  },
+  "icons": {
+    "ColorPalette": {
+      "#AFB1B3": "demoColor",
+      "Actions.Red": "#67C23A",
+      "Objects.Blue": "#F56C6C"
+    },
+    "/actions/execute.svg": "/demo.svg",
+    "/run/run.svg": "/demo.svg"
   }
 }
