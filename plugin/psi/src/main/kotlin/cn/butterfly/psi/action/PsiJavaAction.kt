@@ -1,6 +1,6 @@
 package cn.butterfly.psi.action
 
-import cn.butterfly.vfs.util.Utils
+import cn.butterfly.psi.util.Utils
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
