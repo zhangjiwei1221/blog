@@ -22,7 +22,10 @@ import java.awt.event.MouseEvent
  * @date 2024-06-19
  */
 class MybatisSQLRenderer(private val editor: Editor, private val offset: Int): EditorCustomElementRenderer, InputHandler {
-    
+
+    /**
+     * 用于判断鼠标是否在渲染的图标上停留
+     */
     private var hovering = false
     
     override fun mouseMoved(event: MouseEvent, translated: Point) {
@@ -37,6 +40,7 @@ class MybatisSQLRenderer(private val editor: Editor, private val offset: Int): E
     }
 
     override fun mouseClicked(event: MouseEvent, translated: Point) {
+        // 处理 SQL 日志和参数信息并将拼接结果保存到粘贴板中
         val doc = editor.document
         val sqlLineNumber = doc.getLineNumber(offset)
         val paramsLineNumber = sqlLineNumber + 1
@@ -54,7 +58,10 @@ class MybatisSQLRenderer(private val editor: Editor, private val offset: Int): E
         Toolkit.getDefaultToolkit().systemClipboard.setContents(stringSelection, null)
         Utils.info("复制成功")
     }
-    
+
+    /**
+     * 获取指定行的日志信息
+     */
     private fun getTextByLineNumber(lineNumber: Int): String {
         val doc = editor.document
         val start = doc.getLineStartOffset(lineNumber)
@@ -68,8 +75,8 @@ class MybatisSQLRenderer(private val editor: Editor, private val offset: Int): E
     
     override fun paint(inlay: Inlay<*>, g: Graphics, r: Rectangle, textAttributes: TextAttributes) {
         val consoleIcon = PluginIcons.MAPPER_ICON
-        val curX: Int = r.x + r.width / 2 - consoleIcon.iconWidth / 2
-        val curY: Int = r.y + r.height / 2 - consoleIcon.iconHeight / 2
+        val curX = r.x + r.width / 2 - consoleIcon.iconWidth / 2
+        val curY = r.y + r.height / 2 - consoleIcon.iconHeight / 2
         if (curX >= 0 && curY >= 0) {
             consoleIcon.paintIcon(inlay.editor.component, g, curX, curY)
         }

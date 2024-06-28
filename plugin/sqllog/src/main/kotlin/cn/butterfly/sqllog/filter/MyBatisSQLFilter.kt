@@ -13,7 +13,7 @@ import com.intellij.openapi.project.Project
  * MyBatis SQL 过滤处理
  *
  * @author zjw
- * @date 2024-06-19
+ * @date 2024-06-28
  */
 class MyBatisSQLFilter: Filter, ConsoleFilterProvider {
 
