@@ -22,13 +22,17 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
         <notificationGroup id="sqllog" displayType="BALLOON"/>
         
-        <consoleFilterProvider implementation="cn.butterfly.sqllog.filter.MyBatisSQLFilter" order="first"/>
-
+        <consoleFilterProvider implementation="cn.butterfly.sqllog.filter.MyBatisSQLFilter"
+                               order="first"/>
+        
+        <jvm.exceptionFilter implementation="cn.butterfly.sqllog.filter.ExceptionFilter"
+                             order="last"/>
     </extensions>
 </idea-plugin>

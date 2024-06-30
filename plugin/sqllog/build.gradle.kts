@@ -20,7 +20,7 @@ intellij {
     type.set("IU")
 
     // 用到的插件
-    plugins.set(listOf())
+    plugins.set(listOf("com.intellij.java"))
 }
 
 tasks {
