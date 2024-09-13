@@ -20,7 +20,7 @@ intellij {
     type.set("IU")
 
     // 用到的插件
-    plugins.set(listOf())
+    plugins.set(listOf("java"))
 }
 
 tasks {
@@ -36,6 +36,6 @@ tasks {
     // 设置插件兼容的版本
     patchPluginXml {
         sinceBuild.set("222")
-        untilBuild.set("232.*")
+        untilBuild.set("242.*")
     }
 }
