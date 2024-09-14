@@ -2,6 +2,8 @@ package cn.butterfly.template.module
 
 import cn.butterfly.template.state.TemplateState
 import com.intellij.ide.util.projectWizard.ModuleWizardStep
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
+import com.intellij.openapi.project.ProjectManager
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.bindText
 import com.intellij.ui.dsl.builder.panel
@@ -25,7 +27,11 @@ class TemplateFirstStep: ModuleWizardStep() {
             }.topGap(TopGap.MEDIUM)
             
             row("Location: ") {
-                textFieldWithBrowseButton().bindText(model::location)
+                textFieldWithBrowseButton(
+                    "",
+                    ProjectManager.getInstance().defaultProject,
+                    FileChooserDescriptorFactory.createSingleFolderDescriptor()
+                ).bindText(model::location)
             }.topGap(TopGap.MEDIUM)
             
             row("Group: ") {
@@ -35,6 +41,10 @@ class TemplateFirstStep: ModuleWizardStep() {
             row("Artifact: ") {
                 textField().bindText(model::artifact)
             }.topGap(TopGap.MEDIUM)
+            
+            row("Description: ") {
+                textField().bindText(model::description)
+            }.topGap(TopGap.MEDIUM) 
         }
         
     }
@@ -42,18 +52,20 @@ class TemplateFirstStep: ModuleWizardStep() {
     override fun getComponent() = panel
 
     override fun updateDataModel() {
+        panel.apply()
         state.name = model.name
         state.group = model.group
         state.artifact = model.artifact
         state.location = model.location
-        panel.apply()
+        state.description = model.description
     }
     
     data class Model(
         var name: String = "",
         var group: String = "",
         var artifact: String = "",
-        var location: String = ""
+        var location: String = "",
+        var description: String = ""
     )
 
 }

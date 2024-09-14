@@ -15,7 +15,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
  */
 @Service
 @State(name = "TemplateState", storages = [Storage("template-state.xml")])
-class TemplateState(): PersistentStateComponent<TemplateState> {
+class TemplateState: PersistentStateComponent<TemplateState> {
     
     var name = ""
     
@@ -25,11 +25,13 @@ class TemplateState(): PersistentStateComponent<TemplateState> {
     
     var location = ""
     
-    var email = ""
+    var description = ""
     
-    var author = ""
+    var email = "1945912314@qq.com"
     
-    var blogUrl = ""
+    var author = "butterfly"
+    
+    var blogUrl = "https://juejin.cn/user/3350967174567352"
     
     override fun getState() = this
 

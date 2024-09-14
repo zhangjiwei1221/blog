@@ -29,6 +29,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="cn.butterfly.template.state.TemplateState"/>
         <moduleBuilder builderClass="cn.butterfly.template.module.TemplateBuilder"/>
+        <fileTemplateGroup implementation="cn.butterfly.template.template.TemplateFileFactory"/>
     </extensions>
     
 </idea-plugin>

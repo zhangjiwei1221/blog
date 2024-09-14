@@ -43,16 +43,16 @@ class TemplateSecondStep: ModuleWizardStep() {
     override fun getComponent() = panel
 
     override fun updateDataModel() {
+        panel.apply()
         state.email = model.email
         state.author = model.author
         state.blogUrl = model.blogUrl
-        panel.apply()
     }
     
     data class Model(
-        var email: String = "1945912314@qq.com",
-        var author: String = "butterfly",
-        var blogUrl: String = "https://juejin.cn/user/3350967174567352"
+        var email: String = "",
+        var author: String = "",
+        var blogUrl: String = ""
     )
 
 }
