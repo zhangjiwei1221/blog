@@ -29,6 +29,9 @@ class TemplateBuilder: ModuleBuilder() {
     override fun getModuleType() = TemplateModuleType()
 
     override fun setupRootModel(rootModel: ModifiableRootModel) {
+        // 创建 resources 文件夹
+        val resFile = File("${state.location}${File.separator}src${File.separator}resources")
+        resFile.mkdirs()
         // 设置项目路径
         val virtualFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(state.location)
         rootModel.addContentEntry(virtualFile!!)
@@ -44,9 +47,7 @@ class TemplateBuilder: ModuleBuilder() {
         properties.setProperty("email", state.email)
         properties.setProperty("blogUrl", state.blogUrl)
         val renderedText = template.getText(properties)
-        // 创建 resources 文件夹并写入 XML 文件
-        val resFile = File("${state.location}${File.separator}src${File.separator}resources")
-        resFile.mkdirs()
+        // 写入 XML 文件
         val file = File(resFile.absolutePath + File.separator + TemplateFileFactory.PLUGIN_XML)
         FileUtil.writeToFile(file, renderedText)
         // 设置 source 文件夹
