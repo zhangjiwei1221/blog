@@ -1,6 +1,6 @@
 package cn.butterfly.template.template
 
-import cn.butterfly.sqllog.ui.PluginIcons
+import cn.butterfly.template.ui.PluginIcons
 import com.intellij.ide.fileTemplates.FileTemplateDescriptor
 import com.intellij.ide.fileTemplates.FileTemplateGroupDescriptor
 import com.intellij.ide.fileTemplates.FileTemplateGroupDescriptorFactory

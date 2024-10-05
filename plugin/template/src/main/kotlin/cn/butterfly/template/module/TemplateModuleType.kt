@@ -1,6 +1,6 @@
 package cn.butterfly.template.module
 
-import cn.butterfly.sqllog.ui.PluginIcons
+import cn.butterfly.template.ui.PluginIcons
 import com.intellij.openapi.module.ModuleType
 import org.jetbrains.annotations.NonNls
 

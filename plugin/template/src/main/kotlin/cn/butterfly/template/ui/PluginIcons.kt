@@ -1,4 +1,4 @@
-package cn.butterfly.sqllog.ui
+package cn.butterfly.template.ui
 
 import com.intellij.openapi.util.IconLoader
 
