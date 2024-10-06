@@ -24,7 +24,6 @@ intellij {
 
     // 用到的插件
     plugins.set(listOf(
-        "JavaScript"
 //        "PythonCore:242.21829.3"
 //        "com.intellij.clion"
     ))
