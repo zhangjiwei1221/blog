@@ -5,7 +5,6 @@ import cn.butterfly.template2.template.TemplateFileFactory
 import com.intellij.ide.fileTemplates.FileTemplateManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.io.FileUtil
-import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.ui.dsl.builder.AlignX
 import com.intellij.ui.dsl.builder.TopGap
 import com.intellij.ui.dsl.builder.panel
@@ -19,6 +18,8 @@ import java.util.*
  * @date 2024-10-06
  */
 object TemplateUtils {
+    
+    const val PLUGIN_NAME = "TEMPLATE"
     
     fun initUI(settings: TemplateSettings) = panel {
         row("Name: ") {
@@ -34,13 +35,13 @@ object TemplateUtils {
         }.topGap(TopGap.MEDIUM)
     }
     
-    fun generateFile(project: Project, baseDir: VirtualFile, settings: TemplateSettings) {
+    fun generateFile(project: Project, basePath: String, settings: TemplateSettings) {
         val template = FileTemplateManager.getInstance(project).getJ2eeTemplate(TemplateFileFactory.PLUGIN_XML)
         val properties = Properties()
         properties.setProperty("name", settings.name)
         properties.setProperty("description", settings.description)
         val renderedText = template.getText(properties)
-        FileUtil.writeToFile(File("${baseDir.path}${File.separator}demo.txt"), renderedText)
+        FileUtil.writeToFile(File("${basePath}${File.separator}demo.txt"), renderedText)
     }
     
 }

@@ -22,12 +22,16 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
-    <depends>com.intellij.clion</depends>
+    <depends>JavaScript</depends>
+<!--    <depends>com.intellij.clion</depends>-->
+<!--    <depends>com.intellij.modules.python</depends>-->
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <directoryProjectGenerator implementation="cn.butterfly.template2.module.CTemplateGenerator"/>
+<!--        <directoryProjectGenerator implementation="cn.butterfly.template2.module.CTemplateGenerator"/>-->
+        <directoryProjectGenerator implementation="cn.butterfly.template2.module.WebTemplateGenerator"/>
+<!--        <directoryProjectGenerator implementation="cn.butterfly.template2.module.PyTemplateGenerator"/>-->
         <fileTemplateGroup implementation="cn.butterfly.template2.template.TemplateFileFactory"/>
     </extensions>
     

@@ -16,14 +16,18 @@ repositories {
 intellij {
     // IDEA 的版本
 //    version.set("2023.2.5")
-//    localPath.set("D:\\JetBrains\\WebStorm 2021.1.2")
+    localPath.set("D:\\JetBrains\\WebStorm 2021.1.2")
 //    localPath.set("G:\\JetBrains\\PyCharm 2024.2.1")
-    localPath.set("E:\\CLion 2022.3.2")
+//    localPath.set("E:\\CLion 2022.3.2")
     // 这里 IU 是指付费版, 也可以选择 IC 对应社区版
     type.set("IU")
 
     // 用到的插件
-    plugins.set(listOf("com.intellij.clion"))
+    plugins.set(listOf(
+        "JavaScript"
+//        "PythonCore:242.21829.3"
+//        "com.intellij.clion"
+    ))
 }
 
 tasks {
