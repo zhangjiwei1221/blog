@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>我的待办事项</h1>
+        <div class="todo-input">
+            <label for="todoInput"></label><input type="text" id="todoInput" placeholder="添加新的待办事项...">
+            <button id="addButton">添加</button>
+        </div>
+        <div class="todo-filters">
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="active">未完成</button>
+            <button class="filter-btn" data-filter="completed">已完成</button>
+        </div>
+        <ul id="todoList" class="todo-list">
+            <!-- Todo items will be added here -->
+        </ul>
+        <div class="todo-stats">
+            <span id="todoCount">0 个待办事项</span>
+            <button id="clearCompleted">清除已完成</button>
+        </div>
+        
+        <a href="./download/test.txt" download="test.txt">下载文件</a>
+        <button onclick="sendMessage()">发送消息</button>
+        
+        <script>
+            function sendMessage() {
+                window.javaQuery({
+                    request: 'butterfly',
+                    persistent: false,
+                    onSuccess: function(response) {
+                        console.log(`前端收到响应消息：${response}`)
+                    },
+                    onFailure: function(error_code, error_message) {}
+                })
+            }
+            
+            window.javaQuery({
+                request: 'init',
+                persistent: false,
+                onSuccess: function(scrollbarStyle) {
+                    const style = document.createElement('style')
+                    style.innerHTML = scrollbarStyle
+                    document.head.appendChild(style)
+                },
+                onFailure: function(error_code, error_message) {}
+            })
+        </script>
+    </div>
+    <script src="./assets/script.js"></script>
+</body>
+</html>
