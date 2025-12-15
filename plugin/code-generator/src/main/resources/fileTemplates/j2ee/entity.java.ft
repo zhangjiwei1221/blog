@@ -1,0 +1,28 @@
+package ${packageName}.entity;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+#foreach($package in $packages)
+import ${package};
+#end
+
+/**
+ * ${entityName}实体类
+ *
+ * @author ${author}
+ * @date ${createDate}
+ */
+@Data
+@ApiModel("${entityName}实体类")
+public class ${entityClassName} {
+
+	#foreach($field in $fields)
+    /**
+     * $field.comment
+     */
+    @ApiModelProperty("$field.comment")
+    private $field.type $field.name;
+
+    #end
+}
